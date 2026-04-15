@@ -6,6 +6,7 @@
 - `POST /predict`
 - service load model local từ Hugging Face
 - contract response cho mobile
+- error response thống nhất dạng JSON: `{ "success": false, "error": "..." }`
 
 ## Chạy local
 Yêu cầu máy có Python + pip.
