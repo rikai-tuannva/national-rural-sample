@@ -1,0 +1,19 @@
+# Python
+backend/.venv/
+**/__pycache__/
+*.pyc
+
+# Flutter
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins-dependencies
+mobile/android/.gradle/
+mobile/android/local.properties
+
+# Tester datasets/results
+tester/PlantVillage-Dataset/
+tester/*_benchmark_result.json
+
+# IDE / OS
+.idea/
+.DS_Store
