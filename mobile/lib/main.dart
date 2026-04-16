@@ -98,34 +98,26 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '1. Chọn ảnh',
+                      '1. Upload ảnh từ thư viện',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Chọn 1 ảnh thể hiện tình trạng bệnh của bất kỳ loại cây nông nghiệp nào, sau đó crop / rotate nếu cần trước khi submit.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.black54,
+                        height: 1.4,
+                      ),
+                    ),
                     const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: FilledButton.icon(
-                            onPressed: _isSubmitting
-                                ? null
-                                : () => _pickImage(ImageSource.camera),
-                            icon: const Icon(Icons.photo_camera_outlined),
-                            label: const Text('Chụp ảnh'),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: FilledButton.tonalIcon(
-                            onPressed: _isSubmitting
-                                ? null
-                                : () => _pickImage(ImageSource.gallery),
-                            icon: const Icon(Icons.photo_library_outlined),
-                            label: const Text('Chọn ảnh'),
-                          ),
-                        ),
-                      ],
+                    FilledButton.tonalIcon(
+                      onPressed: _isSubmitting
+                          ? null
+                          : () => _pickImage(ImageSource.gallery),
+                      icon: const Icon(Icons.photo_library_outlined),
+                      label: const Text('Upload từ thư viện'),
                     ),
                     const SizedBox(height: 16),
                     _buildImagePreview(theme),

@@ -7,6 +7,7 @@ void main() {
 
     expect(find.text('Plant Disease Demo'), findsOneWidget);
     expect(find.text('Backend API'), findsOneWidget);
+    expect(find.text('Upload từ thư viện'), findsOneWidget);
     expect(find.text('Submit'), findsOneWidget);
   });
 }
