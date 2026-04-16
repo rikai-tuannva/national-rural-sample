@@ -61,18 +61,28 @@ class CropResult:
     file: str
     crop_index: int
     crop_box: list[int]
+    crop_ratio_width: float
+    crop_ratio_height: float
     expected_label: str
     predicted_label: str
     confidence: float
     ok: bool
 
 
-def build_random_crop(image_path: Path, rng: random.Random) -> tuple[bytes, list[int]]:
+def build_random_crop(
+    image_path: Path,
+    rng: random.Random,
+    min_crop_ratio: float,
+    max_crop_ratio: float,
+) -> tuple[bytes, list[int], float, float]:
     image = Image.open(image_path).convert("RGB")
     width, height = image.size
 
-    crop_width = max(1, width // 3)
-    crop_height = max(1, height // 3)
+    ratio_width = rng.uniform(min_crop_ratio, max_crop_ratio)
+    ratio_height = rng.uniform(min_crop_ratio, max_crop_ratio)
+
+    crop_width = max(1, int(width * ratio_width))
+    crop_height = max(1, int(height * ratio_height))
 
     max_left = max(0, width - crop_width)
     max_top = max(0, height - crop_height)
@@ -85,17 +95,25 @@ def build_random_crop(image_path: Path, rng: random.Random) -> tuple[bytes, list
     cropped = image.crop((left, top, right, bottom))
     buffer = BytesIO()
     cropped.save(buffer, format="JPEG", quality=95)
-    return buffer.getvalue(), [left, top, right, bottom]
+    return buffer.getvalue(), [left, top, right, bottom], round(ratio_width, 4), round(ratio_height, 4)
 
 
-def predict_crop(image_name: str, image_bytes: bytes) -> dict:
-    response = requests.post(
-        API_URL,
-        files={"image": (image_name, image_bytes, "image/jpeg")},
-        timeout=TIMEOUT,
-    )
-    response.raise_for_status()
-    return response.json()
+def predict_crop(image_name: str, image_bytes: bytes, retries: int = 3) -> dict:
+    last_error: Exception | None = None
+    for _ in range(retries):
+        try:
+            response = requests.post(
+                API_URL,
+                files={"image": (image_name, image_bytes, "image/jpeg")},
+                timeout=TIMEOUT,
+            )
+            response.raise_for_status()
+            return response.json()
+        except requests.RequestException as exc:
+            last_error = exc
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError("Prediction request failed without explicit error")
 
 
 def main() -> None:
@@ -103,10 +121,14 @@ def main() -> None:
     parser.add_argument("--sample-size", type=int, default=30)
     parser.add_argument("--crops-per-image", type=int, default=1)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--min-crop-ratio", type=float, default=0.3)
+    parser.add_argument("--max-crop-ratio", type=float, default=0.8)
     args = parser.parse_args()
 
     if not BASE_DIR.exists():
         raise SystemExit(f"Missing dataset directory: {BASE_DIR}")
+    if not (0 < args.min_crop_ratio <= args.max_crop_ratio <= 1):
+        raise SystemExit("Crop ratio must satisfy 0 < min <= max <= 1")
 
     rng = random.Random(args.seed)
     all_files = sorted([p for p in BASE_DIR.rglob('*') if p.is_file()])
@@ -118,7 +140,12 @@ def main() -> None:
     for image_path in sampled_files:
         expected_label = ID_TO_LABEL[int(image_path.parent.name)]
         for crop_index in range(args.crops_per_image):
-            crop_bytes, crop_box = build_random_crop(image_path, rng)
+            crop_bytes, crop_box, crop_ratio_width, crop_ratio_height = build_random_crop(
+                image_path,
+                rng,
+                args.min_crop_ratio,
+                args.max_crop_ratio,
+            )
             payload = predict_crop(image_path.name, crop_bytes)
             predicted_label = payload['prediction']['label']
             confidence = float(payload['prediction']['confidence'])
@@ -128,6 +155,8 @@ def main() -> None:
                     file=str(image_path.relative_to(BASE_DIR.parent.parent)),
                     crop_index=crop_index,
                     crop_box=crop_box,
+                    crop_ratio_width=crop_ratio_width,
+                    crop_ratio_height=crop_ratio_height,
                     expected_label=expected_label,
                     predicted_label=predicted_label,
                     confidence=confidence,
@@ -144,7 +173,7 @@ def main() -> None:
         'seed': args.seed,
         'sample_size': sample_size,
         'crops_per_image': args.crops_per_image,
-        'crop_ratio': '1/3',
+        'crop_ratio_range': [args.min_crop_ratio, args.max_crop_ratio],
         'total_crops': total,
         'correct': correct,
         'accuracy': accuracy,
@@ -158,7 +187,7 @@ def main() -> None:
         'seed': output['seed'],
         'sample_size': output['sample_size'],
         'crops_per_image': output['crops_per_image'],
-        'crop_ratio': output['crop_ratio'],
+        'crop_ratio_range': output['crop_ratio_range'],
         'total_crops': output['total_crops'],
         'correct': output['correct'],
         'accuracy': output['accuracy'],
