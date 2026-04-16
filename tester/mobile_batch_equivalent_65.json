@@ -1,0 +1,732 @@
+{
+  "seed": 20260416,
+  "selected_batch_size": 65,
+  "total": 65,
+  "correct": 50,
+  "wrong": 15,
+  "accuracy": 0.7692307692307693,
+  "results": [
+    {
+      "asset_name": "sample_063.jpg",
+      "source_name": "75021ea3-4eb8-434a-9a15-6dd05423f6d1.JPG",
+      "expected_label": "Grape with Esca (Black Measles)",
+      "predicted_label": "Grape with Esca (Black Measles)",
+      "confidence": 0.9999,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_180.jpg",
+      "source_name": "62bb48b8-5ebd-425d-9237-8a200dc5b83a.JPG",
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.9988,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_159.jpg",
+      "source_name": "72f4ac8b-978e-4541-b325-d46c233cd3e7.JPG",
+      "expected_label": "Healthy Corn (Maize) Plant",
+      "predicted_label": "Healthy Corn (Maize) Plant",
+      "confidence": 0.9999,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_032.jpg",
+      "source_name": "4c3af62b-bc85-4a39-8e5d-f3c580fa8ba8.JPG",
+      "expected_label": "Squash with Powdery Mildew",
+      "predicted_label": "Squash with Powdery Mildew",
+      "confidence": 0.9995,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_013.jpg",
+      "source_name": "6f510ea1-c6e1-4bb0-946c-46d36611951e.JPG",
+      "expected_label": "Healthy Bell Pepper Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 0.664,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_125.jpg",
+      "source_name": "6288e2f3-4e98-4cf4-a3e0-1e64ecb811ef.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9874,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_089.jpg",
+      "source_name": "b72a7107-e143-471e-acc5-71f2aee52dc4.JPG",
+      "expected_label": "Corn (Maize) with Northern Leaf Blight",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.6803,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_181.jpg",
+      "source_name": "f6990671-04e5-4050-aaef-bc3ad0b0178f.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9921,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_098.jpg",
+      "source_name": "27efe8e3-4d72-4fbf-bf7a-c0bcd7325d6e.JPG",
+      "expected_label": "Grape with Black Rot",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 1.0,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_112.jpg",
+      "source_name": "653bd0b2-a6a5-444f-9bcf-e5dd357254ba.JPG",
+      "expected_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.7033,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_135.jpg",
+      "source_name": "25add354-ce60-486d-986a-30ef1a89ecbf.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.995,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_034.jpg",
+      "source_name": "3795c3e3-875e-42e9-8003-5b09788ef22b.JPG",
+      "expected_label": "Corn (Maize) with Northern Leaf Blight",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.7974,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_190.jpg",
+      "source_name": "855eb403-6206-4b5c-9e49-b47e643b9db3.JPG",
+      "expected_label": "Tomato with Leaf Mold",
+      "predicted_label": "Tomato with Leaf Mold",
+      "confidence": 0.9748,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_119.jpg",
+      "source_name": "63155e53-3591-47f6-9316-4d88b6b9ccbd.JPG",
+      "expected_label": "Potato with Early Blight",
+      "predicted_label": "Potato with Early Blight",
+      "confidence": 0.9996,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_086.jpg",
+      "source_name": "90ab2d64-4b47-4b65-8bef-09354233c4fa.JPG",
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Tomato with Target Spot",
+      "confidence": 0.9751,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_065.jpg",
+      "source_name": "22fa7b9f-8c30-4484-a1bd-e0ae719d125f.JPG",
+      "expected_label": "Strawberry with Leaf Scorch",
+      "predicted_label": "Strawberry with Leaf Scorch",
+      "confidence": 0.8815,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_182.jpg",
+      "source_name": "cbc406ef-6d5c-41a1-aa21-42e3ad3e11da.JPG",
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Soybean Plant",
+      "confidence": 0.6664,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_091.jpg",
+      "source_name": "49c83d10-bb79-48ac-be5a-25539495c724.JPG",
+      "expected_label": "Healthy Apple",
+      "predicted_label": "Healthy Apple",
+      "confidence": 0.9998,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_054.jpg",
+      "source_name": "b68c8a57-9df1-4bee-a441-e5f25730f4d6.JPG",
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Soybean Plant",
+      "confidence": 0.9764,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_118.jpg",
+      "source_name": "89771956-61f2-4582-9391-33bc8c2df93c.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Tomato with Bacterial Spot",
+      "confidence": 0.989,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_059.jpg",
+      "source_name": "0d6823f4-da4b-425c-a1b6-972a98832db2.JPG",
+      "expected_label": "Healthy Tomato Plant",
+      "predicted_label": "Tomato with Target Spot",
+      "confidence": 0.5246,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_113.jpg",
+      "source_name": "6bc3e780-102c-47f4-9bfd-cb74138d1ab5.JPG",
+      "expected_label": "Grape with Esca (Black Measles)",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 0.5425,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_084.jpg",
+      "source_name": "3a8c3af4-f0e1-4b18-a728-b0ab8f2909af.JPG",
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.362,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_127.jpg",
+      "source_name": "36d6798e-107b-4a88-a241-b7226b820c71.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9997,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_014.jpg",
+      "source_name": "4dc3076a-98c4-4c9b-b35f-df7a7214b498.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Tomato with Bacterial Spot",
+      "confidence": 0.17,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_153.jpg",
+      "source_name": "1ea7328c-fcbb-4949-a5f0-1a707f0e2cf2.JPG",
+      "expected_label": "Squash with Powdery Mildew",
+      "predicted_label": "Squash with Powdery Mildew",
+      "confidence": 0.9961,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_187.jpg",
+      "source_name": "f32128f7-bdd4-4da3-b88a-88359796cc67.JPG",
+      "expected_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.8261,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_117.jpg",
+      "source_name": "eff7bea7-962a-464f-86bd-45676a753c37.JPG",
+      "expected_label": "Healthy Apple",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.818,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_027.jpg",
+      "source_name": "64f38dfe-5d9a-4f63-a95e-58e2798d65bd.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9876,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_184.jpg",
+      "source_name": "179e8d05-22f0-4003-b675-162caa2acea8.JPG",
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.7778,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_177.jpg",
+      "source_name": "c4844f7d-7b43-4a54-ba8f-6b8cecb9639b.JPG",
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.995,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_078.jpg",
+      "source_name": "734b912c-f28a-40b1-a7fd-f0b7cc9ddc4b.JPG",
+      "expected_label": "Grape with Esca (Black Measles)",
+      "predicted_label": "Grape with Esca (Black Measles)",
+      "confidence": 0.9981,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_095.jpg",
+      "source_name": "00034bbf-d123-4b8d-ae7a-4f7634cd82c3.JPG",
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 0.5226,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_194.jpg",
+      "source_name": "ff63abc0-6d14-459d-96ba-68e093495b4a.JPG",
+      "expected_label": "Cedar Apple Rust",
+      "predicted_label": "Cedar Apple Rust",
+      "confidence": 0.9705,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_093.jpg",
+      "source_name": "d48e3b8d-7e9d-411d-bf33-30ac5d527930.JPG",
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.9886,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_133.jpg",
+      "source_name": "e1a1e30e-e9b9-4c7e-aa88-2cbf292f27ee.JPG",
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.925,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_031.jpg",
+      "source_name": "7c9eda73-65f6-4383-8d2b-f47e26bbfb9f.JPG",
+      "expected_label": "Grape with Isariopsis Leaf Spot",
+      "predicted_label": "Potato with Late Blight",
+      "confidence": 0.6248,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_049.jpg",
+      "source_name": "c7811cfe-79ea-4d1c-8f03-3d5b0058baa7.JPG",
+      "expected_label": "Apple with Black Rot",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.4804,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_163.jpg",
+      "source_name": "eb7fc964-c89a-4235-b438-8f033c283b33.JPG",
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Soybean Plant",
+      "confidence": 0.4943,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_050.jpg",
+      "source_name": "3b9d3f32-1961-417d-b68a-063ea7bb8f18.JPG",
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.4007,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_028.jpg",
+      "source_name": "a651b0bb-02b0-4ca9-91b2-c0da8ffe6f9e.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9999,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_069.jpg",
+      "source_name": "fc18f65f-f41e-4faf-a56d-5172dd376b63.JPG",
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9994,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_192.jpg",
+      "source_name": "69000dca-3cd3-4aac-9827-e0c89b5cc227.JPG",
+      "expected_label": "Strawberry with Leaf Scorch",
+      "predicted_label": "Strawberry with Leaf Scorch",
+      "confidence": 0.9981,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_114.jpg",
+      "source_name": "bd52d3ff-bd37-4bf0-a24f-a2d677670d0b.JPG",
+      "expected_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.9921,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_072.jpg",
+      "source_name": "f5a2a651-7373-4872-a3ad-d65be37ae80c.JPG",
+      "expected_label": "Peach with Bacterial Spot",
+      "predicted_label": "Peach with Bacterial Spot",
+      "confidence": 0.9998,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_039.jpg",
+      "source_name": "80de057c-c6a9-4c9f-926d-7340dae73fc8.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.6513,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_188.jpg",
+      "source_name": "160d522d-3edc-449a-afe1-dd65a9101add.JPG",
+      "expected_label": "Healthy Tomato Plant",
+      "predicted_label": "Healthy Tomato Plant",
+      "confidence": 0.9184,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_004.jpg",
+      "source_name": "9eb9f2bc-7f14-4654-9ef4-18683bef610e.JPG",
+      "expected_label": "Potato with Early Blight",
+      "predicted_label": "Potato with Early Blight",
+      "confidence": 0.9996,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_036.jpg",
+      "source_name": "825cb862-7b97-4e73-b264-a9329b82623a.JPG",
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9843,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_130.jpg",
+      "source_name": "e78b9e05-d30f-4e12-ba6a-0cc2487abb9b.JPG",
+      "expected_label": "Peach with Bacterial Spot",
+      "predicted_label": "Peach with Bacterial Spot",
+      "confidence": 0.6641,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_052.jpg",
+      "source_name": "d9f2f469-087e-481d-ba3d-0469f1f8dce5.JPG",
+      "expected_label": "Tomato with Late Blight",
+      "predicted_label": "Tomato with Late Blight",
+      "confidence": 0.9323,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_024.jpg",
+      "source_name": "e8894b90-3817-432f-96ed-139f52771bea.JPG",
+      "expected_label": "Bell Pepper with Bacterial Spot",
+      "predicted_label": "Bell Pepper with Bacterial Spot",
+      "confidence": 0.7373,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_151.jpg",
+      "source_name": "14ca0a76-9efc-4789-a26a-bd1ee2a9f049.JPG",
+      "expected_label": "Corn (Maize) with Common Rust",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.8836,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_081.jpg",
+      "source_name": "e51c10c2-fe09-4f4e-87c4-b558d760a4e7.JPG",
+      "expected_label": "Grape with Isariopsis Leaf Spot",
+      "predicted_label": "Grape with Isariopsis Leaf Spot",
+      "confidence": 1.0,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_138.jpg",
+      "source_name": "900466e3-2de5-4810-90b7-4df945d432cd.JPG",
+      "expected_label": "Healthy Grape Plant",
+      "predicted_label": "Healthy Grape Plant",
+      "confidence": 0.9996,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_092.jpg",
+      "source_name": "825861fa-d954-426d-b0f6-9cda40cbfa77.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.4193,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_015.jpg",
+      "source_name": "5539d4c4-bfa3-4f47-a5f1-f0c9906e07d7.JPG",
+      "expected_label": "Grape with Esca (Black Measles)",
+      "predicted_label": "Grape with Esca (Black Measles)",
+      "confidence": 0.4482,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_066.jpg",
+      "source_name": "7c1bcd1f-755f-4b2a-8ec5-b690ea4ec1f8.JPG",
+      "expected_label": "Bell Pepper with Bacterial Spot",
+      "predicted_label": "Bell Pepper with Bacterial Spot",
+      "confidence": 0.9361,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_185.jpg",
+      "source_name": "c28a6461-78d0-4fd1-b38e-a262130b155a.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Tomato with Bacterial Spot",
+      "confidence": 0.3067,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_079.jpg",
+      "source_name": "2f2cdeed-a55d-4b62-9fe7-beb2bf1123c5.JPG",
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9465,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_076.jpg",
+      "source_name": "f977470e-d468-4476-a701-11af4e5c1634.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9792,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_170.jpg",
+      "source_name": "64375f30-7a78-46ad-81c1-2ab3361acddc.JPG",
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.996,
+      "ok": true,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_200.jpg",
+      "source_name": "038dec47-6ec1-43e8-91d1-8b3d47c6f1e4.JPG",
+      "expected_label": "Apple with Black Rot",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.7154,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_121.jpg",
+      "source_name": "3f581771-d4fe-4b04-a1f1-3da6d54e9e54.JPG",
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Tomato with Target Spot",
+      "confidence": 0.2018,
+      "ok": true,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_102.jpg",
+      "source_name": "d9263555-e149-478b-b54e-77295921c45e.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Tomato with Bacterial Spot",
+      "confidence": 0.9789,
+      "ok": true,
+      "rotated_clockwise": true
+    }
+  ],
+  "failures": [
+    {
+      "asset_name": "sample_089.jpg",
+      "source_name": "b72a7107-e143-471e-acc5-71f2aee52dc4.JPG",
+      "expected_label": "Corn (Maize) with Northern Leaf Blight",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.6803,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_112.jpg",
+      "source_name": "653bd0b2-a6a5-444f-9bcf-e5dd357254ba.JPG",
+      "expected_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.7033,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_034.jpg",
+      "source_name": "3795c3e3-875e-42e9-8003-5b09788ef22b.JPG",
+      "expected_label": "Corn (Maize) with Northern Leaf Blight",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.7974,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_059.jpg",
+      "source_name": "0d6823f4-da4b-425c-a1b6-972a98832db2.JPG",
+      "expected_label": "Healthy Tomato Plant",
+      "predicted_label": "Tomato with Target Spot",
+      "confidence": 0.5246,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_113.jpg",
+      "source_name": "6bc3e780-102c-47f4-9bfd-cb74138d1ab5.JPG",
+      "expected_label": "Grape with Esca (Black Measles)",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 0.5425,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_187.jpg",
+      "source_name": "f32128f7-bdd4-4da3-b88a-88359796cc67.JPG",
+      "expected_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.8261,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_117.jpg",
+      "source_name": "eff7bea7-962a-464f-86bd-45676a753c37.JPG",
+      "expected_label": "Healthy Apple",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.818,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_095.jpg",
+      "source_name": "00034bbf-d123-4b8d-ae7a-4f7634cd82c3.JPG",
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 0.5226,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_031.jpg",
+      "source_name": "7c9eda73-65f6-4383-8d2b-f47e26bbfb9f.JPG",
+      "expected_label": "Grape with Isariopsis Leaf Spot",
+      "predicted_label": "Potato with Late Blight",
+      "confidence": 0.6248,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_049.jpg",
+      "source_name": "c7811cfe-79ea-4d1c-8f03-3d5b0058baa7.JPG",
+      "expected_label": "Apple with Black Rot",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.4804,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_050.jpg",
+      "source_name": "3b9d3f32-1961-417d-b68a-063ea7bb8f18.JPG",
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Healthy Potato Plant",
+      "confidence": 0.4007,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_039.jpg",
+      "source_name": "80de057c-c6a9-4c9f-926d-7340dae73fc8.JPG",
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.6513,
+      "ok": false,
+      "rotated_clockwise": true
+    },
+    {
+      "asset_name": "sample_151.jpg",
+      "source_name": "14ca0a76-9efc-4789-a26a-bd1ee2a9f049.JPG",
+      "expected_label": "Corn (Maize) with Common Rust",
+      "predicted_label": "Corn (Maize) with Cercospora and Gray Leaf Spot",
+      "confidence": 0.8836,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_092.jpg",
+      "source_name": "825861fa-d954-426d-b0f6-9cda40cbfa77.JPG",
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.4193,
+      "ok": false,
+      "rotated_clockwise": false
+    },
+    {
+      "asset_name": "sample_200.jpg",
+      "source_name": "038dec47-6ec1-43e8-91d1-8b3d47c6f1e4.JPG",
+      "expected_label": "Apple with Black Rot",
+      "predicted_label": "Healthy Peach Plant",
+      "confidence": 0.7154,
+      "ok": false,
+      "rotated_clockwise": false
+    }
+  ]
+}
