@@ -66,17 +66,21 @@ def pick_batch_rows(rows: list[dict[str, str]], size: int) -> list[dict[str, str
     return shuffled[:size]
 
 
-def crop_random_jpeg(image_bytes: bytes, rng: random.Random) -> bytes:
+def crop_smart_jpeg(image_bytes: bytes, rng: random.Random) -> bytes:
     image = Image.open(BytesIO(image_bytes)).convert('RGB')
     width, height = image.size
-    ratio_width = rng.random() * 0.5 + 0.3
-    ratio_height = rng.random() * 0.5 + 0.3
+    ratio_width = rng.random() * 0.2 + 0.65
+    ratio_height = rng.random() * 0.2 + 0.65
     crop_width = max(1, int(width * ratio_width))
     crop_height = max(1, int(height * ratio_height))
     max_left = max(0, width - crop_width)
     max_top = max(0, height - crop_height)
-    left = rng.randint(0, max_left) if max_left > 0 else 0
-    top = rng.randint(0, max_top) if max_top > 0 else 0
+    center_left = max_left // 2
+    center_top = max_top // 2
+    jitter_x = max(1, round(max_left * 0.2))
+    jitter_y = max(1, round(max_top * 0.2))
+    left = 0 if max_left == 0 else max(0, min(max_left, center_left + rng.randint(-jitter_x, jitter_x)))
+    top = 0 if max_top == 0 else max(0, min(max_top, center_top + rng.randint(-jitter_y, jitter_y)))
     cropped = image.crop((left, top, left + crop_width, top + crop_height))
     out = BytesIO()
     cropped.save(out, format='JPEG', quality=95)
@@ -114,7 +118,7 @@ def run(size: int) -> dict:
         expected_label = ID_TO_LABEL[class_id]
         source_name = row['source_name']
         original_bytes = (MOBILE_ASSET_DIR / asset_name).read_bytes()
-        cropped = crop_random_jpeg(original_bytes, rng)
+        cropped = crop_smart_jpeg(original_bytes, rng)
         clockwise = rng.choice([True, False])
         rotated = rotate_jpeg(cropped, clockwise)
         payload = predict(asset_name, rotated)

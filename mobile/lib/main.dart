@@ -48,13 +48,16 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
   final ImagePicker _imagePicker = ImagePicker();
   final TextEditingController _apiController =
       TextEditingController(text: _defaultApiBaseUrl);
-  final Random _random = Random(20260416);
+  static const int _batchSeed = 20260416;
+  final Random _random = Random(_batchSeed);
+  static const List<int> _batchSizeOptions = [10, 15, 25, 40, 50, 65];
 
   File? _selectedImage;
   PredictionResponse? _prediction;
   String? _errorMessage;
   bool _isSubmitting = false;
   bool _isBatchRunning = false;
+  int _selectedBatchSize = 50;
   BatchRunSummary? _batchSummary;
 
   @override
@@ -204,11 +207,30 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Chạy tự động 50 ảnh mẫu ngay trong app: mỗi ảnh sẽ crop ngẫu nhiên, rotate ngẫu nhiên rồi submit lên backend để lấy kết quả tổng hợp.',
+                      'Chạy tự động trên pool 200 ảnh mẫu: app sẽ random đúng số lượng đã chọn, crop ngẫu nhiên, rotate ngẫu nhiên rồi submit lên backend để lấy kết quả tổng hợp.',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: Colors.black54,
                         height: 1.4,
                       ),
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: _batchSizeOptions.map((size) {
+                        final selected = size == _selectedBatchSize;
+                        return ChoiceChip(
+                          label: Text('$size ảnh'),
+                          selected: selected,
+                          onSelected: _isBusy
+                              ? null
+                              : (_) {
+                                  setState(() {
+                                    _selectedBatchSize = size;
+                                  });
+                                },
+                        );
+                      }).toList(),
                     ),
                     const SizedBox(height: 12),
                     FilledButton.tonalIcon(
@@ -222,13 +244,18 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                           : const Icon(Icons.auto_awesome_motion_outlined),
                       label: Text(
                         _isBatchRunning
-                            ? 'Đang chạy batch 50 ảnh...'
-                            : 'Chạy batch 50 ảnh',
+                            ? 'Đang chạy batch $_selectedBatchSize ảnh...'
+                            : 'Chạy batch $_selectedBatchSize ảnh',
                       ),
                     ),
                     if (_batchSummary != null) ...[
                       const SizedBox(height: 16),
                       _buildBatchSummary(theme, _batchSummary!),
+                      const SizedBox(height: 12),
+                      SelectableText(
+                        'Log file: ${_batchSummary!.logPath}',
+                        style: theme.textTheme.bodySmall,
+                      ),
                     ],
                   ],
                 ),
@@ -521,17 +548,19 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
 
     try {
       final manifest = await rootBundle.loadString('assets/batch_samples/manifest.csv');
-      final lines = manifest
+      final allLines = manifest
           .split('\n')
           .where((line) => line.trim().isNotEmpty)
           .skip(1)
           .toList();
+      final selectedLines = _pickBatchLines(allLines, _selectedBatchSize);
 
       final tempDir = await getTemporaryDirectory();
       final failures = <BatchFailure>[];
+      final results = <BatchResultRecord>[];
       var correct = 0;
 
-      for (final line in lines) {
+      for (final line in selectedLines) {
         final parts = line.split(',');
         if (parts.length < 3) {
           continue;
@@ -539,13 +568,15 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
 
         final assetName = parts[0];
         final classId = int.parse(parts[1]);
+        final sourceName = parts[2];
         final expectedLabel = idToLabel[classId] ?? 'Unknown';
         final data = await rootBundle.load('assets/batch_samples/$assetName');
         final originalBytes = data.buffer.asUint8List();
-        final croppedBytes = _cropBytesRandom(originalBytes) ?? originalBytes;
+        final croppedBytes = _cropBytesSmart(originalBytes) ?? originalBytes;
+        final rotateClockwise = _random.nextBool();
         final rotatedBytes = _rotateBytes(
               croppedBytes,
-              clockwise: _random.nextBool(),
+              clockwise: rotateClockwise,
             ) ??
             croppedBytes;
 
@@ -555,6 +586,17 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
         final prediction = await _predictFromFile(tempFile);
         final ok = prediction.prediction.label == expectedLabel;
         correct += ok ? 1 : 0;
+        results.add(
+          BatchResultRecord(
+            assetName: assetName,
+            sourceName: sourceName,
+            expectedLabel: expectedLabel,
+            predictedLabel: prediction.prediction.label,
+            confidence: prediction.prediction.confidence,
+            ok: ok,
+            rotatedClockwise: rotateClockwise,
+          ),
+        );
         if (!ok) {
           failures.add(
             BatchFailure(
@@ -567,15 +609,23 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
         }
       }
 
+      final logPath = await _writeBatchLog(
+        total: results.length,
+        correct: correct,
+        failures: failures,
+        results: results,
+      );
+
       if (!mounted) {
         return;
       }
 
       setState(() {
         _batchSummary = BatchRunSummary(
-          total: lines.length,
+          total: results.length,
           correct: correct,
           failures: failures,
+          logPath: logPath,
         );
       });
     } catch (error) {
@@ -592,6 +642,65 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
         });
       }
     }
+  }
+
+  List<String> _pickBatchLines(List<String> lines, int size) {
+    if (lines.length <= size) {
+      return List<String>.from(lines);
+    }
+
+    final shuffled = List<String>.from(lines)
+      ..shuffle(Random(_batchSeed + size));
+    return shuffled.take(size).toList();
+  }
+
+  Future<String> _writeBatchLog({
+    required int total,
+    required int correct,
+    required List<BatchFailure> failures,
+    required List<BatchResultRecord> results,
+  }) async {
+    final tempDir = await getTemporaryDirectory();
+    final logFile = File(
+      '${tempDir.path}/batch_result_$_selectedBatchSize.json',
+    );
+    final payload = {
+      'seed': _batchSeed,
+      'selected_batch_size': _selectedBatchSize,
+      'total': total,
+      'correct': correct,
+      'wrong': total - correct,
+      'accuracy': total == 0 ? 0 : correct / total,
+      'log_generated_at': DateTime.now().toIso8601String(),
+      'failures': failures
+          .map(
+            (item) => {
+              'asset_name': item.assetName,
+              'expected_label': item.expectedLabel,
+              'predicted_label': item.predictedLabel,
+              'confidence': item.confidence,
+            },
+          )
+          .toList(),
+      'results': results
+          .map(
+            (item) => {
+              'asset_name': item.assetName,
+              'source_name': item.sourceName,
+              'expected_label': item.expectedLabel,
+              'predicted_label': item.predictedLabel,
+              'confidence': item.confidence,
+              'ok': item.ok,
+              'rotated_clockwise': item.rotatedClockwise,
+            },
+          )
+          .toList(),
+    };
+    await logFile.writeAsString(
+      const JsonEncoder.withIndent('  ').convert(payload),
+      flush: true,
+    );
+    return logFile.path;
   }
 
   Future<PredictionResponse> _predictFromFile(File image) async {
@@ -619,18 +728,26 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     throw Exception((jsonBody['error'] ?? 'Gọi API thất bại').toString());
   }
 
-  Uint8List? _cropBytesRandom(Uint8List bytes) {
+  Uint8List? _cropBytesSmart(Uint8List bytes) {
     final decoded = img.decodeImage(bytes);
     if (decoded == null) {
       return null;
     }
 
-    final cropWidth = max(1, ((decoded.width * (_random.nextDouble() * 0.5 + 0.3))).floor());
-    final cropHeight = max(1, ((decoded.height * (_random.nextDouble() * 0.5 + 0.3))).floor());
+    final cropWidth = max(1, ((decoded.width * (_random.nextDouble() * 0.2 + 0.65))).floor());
+    final cropHeight = max(1, ((decoded.height * (_random.nextDouble() * 0.2 + 0.65))).floor());
     final maxX = max(0, decoded.width - cropWidth);
     final maxY = max(0, decoded.height - cropHeight);
-    final x = maxX == 0 ? 0 : _random.nextInt(maxX + 1);
-    final y = maxY == 0 ? 0 : _random.nextInt(maxY + 1);
+    final centerX = maxX ~/ 2;
+    final centerY = maxY ~/ 2;
+    final jitterX = max(1, (maxX * 0.2).round());
+    final jitterY = max(1, (maxY * 0.2).round());
+    final x = maxX == 0
+        ? 0
+        : (centerX + _random.nextInt(jitterX * 2 + 1) - jitterX).clamp(0, maxX);
+    final y = maxY == 0
+        ? 0
+        : (centerY + _random.nextInt(jitterY * 2 + 1) - jitterY).clamp(0, maxY);
     final cropped = img.copyCrop(decoded, x: x, y: y, width: cropWidth, height: cropHeight);
     return Uint8List.fromList(img.encodeJpg(cropped, quality: 95));
   }
@@ -719,13 +836,35 @@ class BatchRunSummary {
     required this.total,
     required this.correct,
     required this.failures,
+    required this.logPath,
   });
 
   final int total;
   final int correct;
   final List<BatchFailure> failures;
+  final String logPath;
 
   double get accuracy => total == 0 ? 0 : correct / total;
+}
+
+class BatchResultRecord {
+  BatchResultRecord({
+    required this.assetName,
+    required this.sourceName,
+    required this.expectedLabel,
+    required this.predictedLabel,
+    required this.confidence,
+    required this.ok,
+    required this.rotatedClockwise,
+  });
+
+  final String assetName;
+  final String sourceName;
+  final String expectedLabel;
+  final String predictedLabel;
+  final double confidence;
+  final bool ok;
+  final bool rotatedClockwise;
 }
 
 class BatchFailure {
