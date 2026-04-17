@@ -1,0 +1,175 @@
+{
+  "seed": 4242,
+  "sample_size": 10,
+  "crops_per_image": 1,
+  "crop_ratio_range": [
+    0.3,
+    0.8
+  ],
+  "total_crops": 10,
+  "correct": 10,
+  "accuracy": 1.0,
+  "first_20_failures": [],
+  "results": [
+    {
+      "file": "data_distribution_for_SVM/test/31/5c98804b-4356-48d4-9c3b-cc6a3c6b3d50.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        20,
+        19,
+        159,
+        199
+      ],
+      "crop_ratio_width": 0.5468,
+      "crop_ratio_height": 0.7068,
+      "expected_label": "Tomato with Leaf Mold",
+      "predicted_label": "Tomato with Leaf Mold",
+      "confidence": 0.8492,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/d45a1192-d757-4c83-b1bf-17f8057c15ec.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        15,
+        3,
+        165,
+        165
+      ],
+      "crop_ratio_width": 0.5869,
+      "crop_ratio_height": 0.636,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/11/3f5c2f8f-df9c-4ee1-af6c-ce815c1153cd.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        86,
+        31,
+        179,
+        125
+      ],
+      "crop_ratio_width": 0.3634,
+      "crop_ratio_height": 0.371,
+      "expected_label": "Grape with Black Rot",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 0.9607,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/8/11b127a0-337d-443d-8b0d-b05f11cc6dd5.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        145,
+        59,
+        243,
+        166
+      ],
+      "crop_ratio_width": 0.3857,
+      "crop_ratio_height": 0.4189,
+      "expected_label": "Corn (Maize) with Common Rust",
+      "predicted_label": "Corn (Maize) with Common Rust",
+      "confidence": 0.9956,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/30/0016ce67-68e5-42c5-b047-bd6e839f9154.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        35,
+        86,
+        228,
+        170
+      ],
+      "crop_ratio_width": 0.7542,
+      "crop_ratio_height": 0.3305,
+      "expected_label": "Tomato with Late Blight",
+      "predicted_label": "Tomato with Late Blight",
+      "confidence": 0.9557,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/3/4b524a89-41ce-4701-a81f-a1407faae065.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        132,
+        43,
+        209,
+        233
+      ],
+      "crop_ratio_width": 0.302,
+      "crop_ratio_height": 0.7456,
+      "expected_label": "Healthy Apple",
+      "predicted_label": "Healthy Apple",
+      "confidence": 0.9986,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/26/5adc0c66-9ad8-4f59-b10d-dc2bd834da6e.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        51,
+        41,
+        213,
+        195
+      ],
+      "crop_ratio_width": 0.636,
+      "crop_ratio_height": 0.6036,
+      "expected_label": "Strawberry with Leaf Scorch",
+      "predicted_label": "Strawberry with Leaf Scorch",
+      "confidence": 0.9986,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/24/a5b4e505-217d-43e6-84a9-0c52ccfff7e2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        44,
+        76,
+        215,
+        253
+      ],
+      "crop_ratio_width": 0.6691,
+      "crop_ratio_height": 0.6933,
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Soybean Plant",
+      "confidence": 0.9966,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/19/64ff9902-5baa-4c13-8801-281326113369.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        10,
+        122,
+        158,
+        233
+      ],
+      "crop_ratio_width": 0.5799,
+      "crop_ratio_height": 0.434,
+      "expected_label": "Healthy Bell Pepper Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/35/92c91310-6fff-49e9-9b7c-145567a1c16b.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        42,
+        18,
+        151,
+        219
+      ],
+      "crop_ratio_width": 0.4283,
+      "crop_ratio_height": 0.7878,
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 1.0,
+      "ok": true
+    }
+  ]
+}

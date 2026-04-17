@@ -12,7 +12,6 @@ mobile/android/local.properties
 
 # Tester datasets/results
 tester/PlantVillage-Dataset/
-tester/*_benchmark_result.json
 
 # IDE / OS
 .idea/

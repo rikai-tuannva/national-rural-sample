@@ -1,0 +1,432 @@
+{
+  "seed": 4242,
+  "sample_size": 25,
+  "crops_per_image": 1,
+  "crop_ratio_range": [
+    0.3,
+    0.8
+  ],
+  "total_crops": 25,
+  "correct": 24,
+  "accuracy": 0.96,
+  "first_20_failures": [
+    {
+      "file": "data_distribution_for_SVM/test/34/86dbc18f-96c6-491e-923c-f5e34a943fb2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        15,
+        136,
+        102,
+        252
+      ],
+      "crop_ratio_width": 0.3422,
+      "crop_ratio_height": 0.4548,
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.3661,
+      "ok": false
+    }
+  ],
+  "results": [
+    {
+      "file": "data_distribution_for_SVM/test/31/5c98804b-4356-48d4-9c3b-cc6a3c6b3d50.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        145,
+        59,
+        243,
+        166
+      ],
+      "crop_ratio_width": 0.3857,
+      "crop_ratio_height": 0.4189,
+      "expected_label": "Tomato with Leaf Mold",
+      "predicted_label": "Tomato with Leaf Mold",
+      "confidence": 0.9512,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/d45a1192-d757-4c83-b1bf-17f8057c15ec.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        35,
+        86,
+        228,
+        170
+      ],
+      "crop_ratio_width": 0.7542,
+      "crop_ratio_height": 0.3305,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/11/3f5c2f8f-df9c-4ee1-af6c-ce815c1153cd.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        132,
+        43,
+        209,
+        233
+      ],
+      "crop_ratio_width": 0.302,
+      "crop_ratio_height": 0.7456,
+      "expected_label": "Grape with Black Rot",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 0.6426,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/8/11b127a0-337d-443d-8b0d-b05f11cc6dd5.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        51,
+        41,
+        213,
+        195
+      ],
+      "crop_ratio_width": 0.636,
+      "crop_ratio_height": 0.6036,
+      "expected_label": "Corn (Maize) with Common Rust",
+      "predicted_label": "Corn (Maize) with Common Rust",
+      "confidence": 0.7433,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/30/0016ce67-68e5-42c5-b047-bd6e839f9154.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        44,
+        76,
+        215,
+        253
+      ],
+      "crop_ratio_width": 0.6691,
+      "crop_ratio_height": 0.6933,
+      "expected_label": "Tomato with Late Blight",
+      "predicted_label": "Tomato with Late Blight",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/3/4b524a89-41ce-4701-a81f-a1407faae065.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        10,
+        122,
+        158,
+        233
+      ],
+      "crop_ratio_width": 0.5799,
+      "crop_ratio_height": 0.434,
+      "expected_label": "Healthy Apple",
+      "predicted_label": "Healthy Apple",
+      "confidence": 0.9991,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/26/5adc0c66-9ad8-4f59-b10d-dc2bd834da6e.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        42,
+        18,
+        151,
+        219
+      ],
+      "crop_ratio_width": 0.4283,
+      "crop_ratio_height": 0.7878,
+      "expected_label": "Strawberry with Leaf Scorch",
+      "predicted_label": "Strawberry with Leaf Scorch",
+      "confidence": 0.9979,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/24/a5b4e505-217d-43e6-84a9-0c52ccfff7e2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        113,
+        6,
+        251,
+        200
+      ],
+      "crop_ratio_width": 0.5403,
+      "crop_ratio_height": 0.7597,
+      "expected_label": "Healthy Soybean Plant",
+      "predicted_label": "Healthy Soybean Plant",
+      "confidence": 0.9955,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/19/64ff9902-5baa-4c13-8801-281326113369.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        85,
+        59,
+        254,
+        241
+      ],
+      "crop_ratio_width": 0.6637,
+      "crop_ratio_height": 0.7135,
+      "expected_label": "Healthy Bell Pepper Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/35/92c91310-6fff-49e9-9b7c-145567a1c16b.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        13,
+        79,
+        150,
+        219
+      ],
+      "crop_ratio_width": 0.536,
+      "crop_ratio_height": 0.5472,
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/35/3b08df4f-d655-4361-8152-49783f42d84a.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        53,
+        28,
+        187,
+        174
+      ],
+      "crop_ratio_width": 0.5234,
+      "crop_ratio_height": 0.572,
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9945,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/10/eab2ba9c-6b65-4bb7-a3a1-bf14c6d22b07.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        27,
+        97,
+        215,
+        220
+      ],
+      "crop_ratio_width": 0.7359,
+      "crop_ratio_height": 0.4825,
+      "expected_label": "Healthy Corn (Maize) Plant",
+      "predicted_label": "Healthy Corn (Maize) Plant",
+      "confidence": 0.9989,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/34/86dbc18f-96c6-491e-923c-f5e34a943fb2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        15,
+        136,
+        102,
+        252
+      ],
+      "crop_ratio_width": 0.3422,
+      "crop_ratio_height": 0.4548,
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.3661,
+      "ok": false
+    },
+    {
+      "file": "data_distribution_for_SVM/test/16/922a4762-c5d2-4a05-822e-bf5eedd1e122.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        6,
+        94,
+        110,
+        225
+      ],
+      "crop_ratio_width": 0.4081,
+      "crop_ratio_height": 0.5117,
+      "expected_label": "Peach with Bacterial Spot",
+      "predicted_label": "Peach with Bacterial Spot",
+      "confidence": 0.9397,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/16/811b52be-1a27-4a2d-9448-c3fff4b9cb94.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        73,
+        26,
+        220,
+        179
+      ],
+      "crop_ratio_width": 0.5775,
+      "crop_ratio_height": 0.5985,
+      "expected_label": "Peach with Bacterial Spot",
+      "predicted_label": "Peach with Bacterial Spot",
+      "confidence": 0.9962,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/4/59544ca3-a2ec-4a45-bc22-7d33f71fd1c2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        54,
+        124,
+        232,
+        233
+      ],
+      "crop_ratio_width": 0.6966,
+      "crop_ratio_height": 0.4262,
+      "expected_label": "Healthy Blueberry Plant",
+      "predicted_label": "Healthy Blueberry Plant",
+      "confidence": 0.9948,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/34/f99c0c5d-a42d-41dc-8675-43b4d3c59fad.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        22,
+        15,
+        223,
+        210
+      ],
+      "crop_ratio_width": 0.7853,
+      "crop_ratio_height": 0.7626,
+      "expected_label": "Tomato with Target Spot",
+      "predicted_label": "Tomato with Target Spot",
+      "confidence": 0.994,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/ad99798a-b077-4739-a2b0-a486e2367951.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        108,
+        64,
+        205,
+        246
+      ],
+      "crop_ratio_width": 0.3812,
+      "crop_ratio_height": 0.7125,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/11/21e13ead-850c-4650-b650-1c5f9a53f5f5.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        24,
+        81,
+        226,
+        222
+      ],
+      "crop_ratio_width": 0.7927,
+      "crop_ratio_height": 0.5525,
+      "expected_label": "Grape with Black Rot",
+      "predicted_label": "Grape with Black Rot",
+      "confidence": 0.9776,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/c3ede350-949c-430d-ba71-10e8e9773f93.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        156,
+        28,
+        247,
+        166
+      ],
+      "crop_ratio_width": 0.3557,
+      "crop_ratio_height": 0.5422,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/35/688fe3d6-6f8b-4321-91b5-1e6bbcf4aeb7.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        14,
+        68,
+        150,
+        229
+      ],
+      "crop_ratio_width": 0.533,
+      "crop_ratio_height": 0.6293,
+      "expected_label": "Tomato Yellow Leaf Curl Virus",
+      "predicted_label": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/ff60e6cc-8fe9-4ac3-87c4-5e05937b2894.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        3,
+        6,
+        149,
+        102
+      ],
+      "crop_ratio_width": 0.5732,
+      "crop_ratio_height": 0.3759,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 0.9292,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/19/11bb1a60-2b03-417a-b8eb-4f34ba6fc3a2.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        23,
+        6,
+        215,
+        196
+      ],
+      "crop_ratio_width": 0.7518,
+      "crop_ratio_height": 0.7427,
+      "expected_label": "Healthy Bell Pepper Plant",
+      "predicted_label": "Healthy Bell Pepper Plant",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/28/16cf0f3b-3417-4089-9722-1c9ef4458839.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        28,
+        82,
+        170,
+        175
+      ],
+      "crop_ratio_width": 0.5578,
+      "crop_ratio_height": 0.3645,
+      "expected_label": "Tomato with Bacterial Spot",
+      "predicted_label": "Tomato with Bacterial Spot",
+      "confidence": 0.9986,
+      "ok": true
+    },
+    {
+      "file": "data_distribution_for_SVM/test/15/b0697596-9397-4e90-8ed3-a056de204e3c.JPG",
+      "crop_index": 0,
+      "crop_box": [
+        26,
+        52,
+        150,
+        146
+      ],
+      "crop_ratio_width": 0.4849,
+      "crop_ratio_height": 0.3709,
+      "expected_label": "Orange with Citrus Greening",
+      "predicted_label": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    }
+  ]
+}

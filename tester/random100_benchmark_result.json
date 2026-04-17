@@ -1,0 +1,869 @@
+{
+  "summary": {
+    "seed": 42,
+    "total": 100,
+    "correct": 93,
+    "accuracy": 0.93,
+    "wrong": 7,
+    "first_15_failures": [
+      {
+        "index": 9,
+        "file": "data_distribution_for_SVM/test/36/52b7e986-6fe1-4bb1-aaf6-5c07ee754874.JPG",
+        "expected": "Tomato Mosaic Virus",
+        "predicted": "Tomato Yellow Leaf Curl Virus",
+        "confidence": 0.7965,
+        "ok": false
+      },
+      {
+        "index": 16,
+        "file": "data_distribution_for_SVM/test/21/4e92072e-6200-40ab-bd2b-f5442bf30a60.JPG",
+        "expected": "Potato with Late Blight",
+        "predicted": "Healthy Potato Plant",
+        "confidence": 0.9186,
+        "ok": false
+      },
+      {
+        "index": 29,
+        "file": "data_distribution_for_SVM/test/0/f7b422f4-e479-41ab-85dd-146838cf92d2.JPG",
+        "expected": "Apple Scab",
+        "predicted": "Cherry with Powdery Mildew",
+        "confidence": 0.9322,
+        "ok": false
+      },
+      {
+        "index": 31,
+        "file": "data_distribution_for_SVM/test/32/0cff0cc1-feca-4e1e-bc8d-0d22b2f506a9.JPG",
+        "expected": "Tomato with Septoria Leaf Spot",
+        "predicted": "Tomato with Bacterial Spot",
+        "confidence": 0.6955,
+        "ok": false
+      },
+      {
+        "index": 35,
+        "file": "data_distribution_for_SVM/test/21/0e64b13f-efbc-4d48-9815-9216151ba43b.JPG",
+        "expected": "Potato with Late Blight",
+        "predicted": "Tomato with Target Spot",
+        "confidence": 0.3598,
+        "ok": false
+      },
+      {
+        "index": 44,
+        "file": "data_distribution_for_SVM/test/24/739e88a6-f0ff-4421-bd43-3e6ba4d80d13.JPG",
+        "expected": "Healthy Soybean Plant",
+        "predicted": "Healthy Bell Pepper Plant",
+        "confidence": 0.6237,
+        "ok": false
+      },
+      {
+        "index": 96,
+        "file": "data_distribution_for_SVM/test/20/cec8d744-1aa0-442d-b00d-beb2069eacfa.JPG",
+        "expected": "Potato with Early Blight",
+        "predicted": "Tomato with Septoria Leaf Spot",
+        "confidence": 0.3915,
+        "ok": false
+      }
+    ]
+  },
+  "rows": [
+    {
+      "index": 1,
+      "file": "data_distribution_for_SVM/test/9/ae319266-25f2-496f-a91b-aab69d994fdc.JPG",
+      "expected": "Corn (Maize) with Northern Leaf Blight",
+      "predicted": "Corn (Maize) with Northern Leaf Blight",
+      "confidence": 0.9984,
+      "ok": true
+    },
+    {
+      "index": 2,
+      "file": "data_distribution_for_SVM/test/15/8e87f59b-b0a9-4901-abdf-88f87478d86d.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 3,
+      "file": "data_distribution_for_SVM/test/10/f8510320-e11a-418b-926a-756022ce0921.JPG",
+      "expected": "Healthy Corn (Maize) Plant",
+      "predicted": "Healthy Corn (Maize) Plant",
+      "confidence": 0.9994,
+      "ok": true
+    },
+    {
+      "index": 4,
+      "file": "data_distribution_for_SVM/test/24/a587232d-1ffc-4a9c-ba9c-3374375c2cbf.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9979,
+      "ok": true
+    },
+    {
+      "index": 5,
+      "file": "data_distribution_for_SVM/test/24/17502b1c-4640-4107-9514-dda71c4f89df.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9988,
+      "ok": true
+    },
+    {
+      "index": 6,
+      "file": "data_distribution_for_SVM/test/21/b5b05660-1900-4bf7-87bc-f551a427f9ba.JPG",
+      "expected": "Potato with Late Blight",
+      "predicted": "Potato with Late Blight",
+      "confidence": 0.9155,
+      "ok": true
+    },
+    {
+      "index": 7,
+      "file": "data_distribution_for_SVM/test/15/f7fc7278-cbb4-4bbb-a90e-c2d410556447.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 8,
+      "file": "data_distribution_for_SVM/test/15/6a2a7683-1803-4722-b664-f9679464d280.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 9,
+      "file": "data_distribution_for_SVM/test/36/52b7e986-6fe1-4bb1-aaf6-5c07ee754874.JPG",
+      "expected": "Tomato Mosaic Virus",
+      "predicted": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.7965,
+      "ok": false
+    },
+    {
+      "index": 10,
+      "file": "data_distribution_for_SVM/test/15/33821a21-1713-4a30-9403-474e59be4004.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 11,
+      "file": "data_distribution_for_SVM/test/5/7d530d47-4342-48fb-9d6f-45a4e9e7985a.JPG",
+      "expected": "Cherry with Powdery Mildew",
+      "predicted": "Cherry with Powdery Mildew",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 12,
+      "file": "data_distribution_for_SVM/test/32/03e46911-b98e-4041-b6a2-aef3cc485d8d.JPG",
+      "expected": "Tomato with Septoria Leaf Spot",
+      "predicted": "Tomato with Septoria Leaf Spot",
+      "confidence": 0.9726,
+      "ok": true
+    },
+    {
+      "index": 13,
+      "file": "data_distribution_for_SVM/test/11/81afb69b-6b77-459d-93e0-5fb854914eff.JPG",
+      "expected": "Grape with Black Rot",
+      "predicted": "Grape with Black Rot",
+      "confidence": 0.9692,
+      "ok": true
+    },
+    {
+      "index": 14,
+      "file": "data_distribution_for_SVM/test/11/54dc85c8-7435-4d34-8b90-be4aee56bca6.JPG",
+      "expected": "Grape with Black Rot",
+      "predicted": "Grape with Black Rot",
+      "confidence": 0.9976,
+      "ok": true
+    },
+    {
+      "index": 15,
+      "file": "data_distribution_for_SVM/test/15/496e3253-596b-4280-9f3d-2ca48a6ed8bc.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 16,
+      "file": "data_distribution_for_SVM/test/21/4e92072e-6200-40ab-bd2b-f5442bf30a60.JPG",
+      "expected": "Potato with Late Blight",
+      "predicted": "Healthy Potato Plant",
+      "confidence": 0.9186,
+      "ok": false
+    },
+    {
+      "index": 17,
+      "file": "data_distribution_for_SVM/test/23/758e6093-e894-4e37-a5b9-0d8dea97e2ad.JPG",
+      "expected": "Healthy Raspberry Plant",
+      "predicted": "Healthy Raspberry Plant",
+      "confidence": 0.9638,
+      "ok": true
+    },
+    {
+      "index": 18,
+      "file": "data_distribution_for_SVM/test/35/6714b2d6-db11-46d1-9661-a3b74a5b70b4.JPG",
+      "expected": "Tomato Yellow Leaf Curl Virus",
+      "predicted": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 19,
+      "file": "data_distribution_for_SVM/test/6/65b20505-709a-40f6-85ce-6fa7a6c3c8ec.JPG",
+      "expected": "Healthy Cherry Plant",
+      "predicted": "Healthy Cherry Plant",
+      "confidence": 0.9993,
+      "ok": true
+    },
+    {
+      "index": 20,
+      "file": "data_distribution_for_SVM/test/11/18c9bba0-f057-4158-80a0-157f05c6a6d1.JPG",
+      "expected": "Grape with Black Rot",
+      "predicted": "Grape with Black Rot",
+      "confidence": 0.9984,
+      "ok": true
+    },
+    {
+      "index": 21,
+      "file": "data_distribution_for_SVM/test/37/a349697a-ae1e-4d67-a2d1-3ff9d73234bf.JPG",
+      "expected": "Healthy Tomato Plant",
+      "predicted": "Healthy Tomato Plant",
+      "confidence": 0.9996,
+      "ok": true
+    },
+    {
+      "index": 22,
+      "file": "data_distribution_for_SVM/test/2/a3710f7b-7460-4ba3-8c90-bb5e5d4fac7f.JPG",
+      "expected": "Cedar Apple Rust",
+      "predicted": "Cedar Apple Rust",
+      "confidence": 0.9957,
+      "ok": true
+    },
+    {
+      "index": 23,
+      "file": "data_distribution_for_SVM/test/36/3eab80b9-2d62-47d5-a6e5-523847cd7bbf.JPG",
+      "expected": "Tomato Mosaic Virus",
+      "predicted": "Tomato Mosaic Virus",
+      "confidence": 0.998,
+      "ok": true
+    },
+    {
+      "index": 24,
+      "file": "data_distribution_for_SVM/test/31/c270ac27-d775-4cf0-b7a7-25bbbb788dea.JPG",
+      "expected": "Tomato with Leaf Mold",
+      "predicted": "Tomato with Leaf Mold",
+      "confidence": 0.999,
+      "ok": true
+    },
+    {
+      "index": 25,
+      "file": "data_distribution_for_SVM/test/21/7873d8f5-3161-4b50-8171-0692e1b8b946.JPG",
+      "expected": "Potato with Late Blight",
+      "predicted": "Potato with Late Blight",
+      "confidence": 0.9945,
+      "ok": true
+    },
+    {
+      "index": 26,
+      "file": "data_distribution_for_SVM/test/33/6b1a7dc5-177d-4514-9f20-8dfaa7529b5c.JPG",
+      "expected": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.9987,
+      "ok": true
+    },
+    {
+      "index": 27,
+      "file": "data_distribution_for_SVM/test/5/67bbc234-5bee-44ea-9a58-12e2c0dcf2c6.JPG",
+      "expected": "Cherry with Powdery Mildew",
+      "predicted": "Cherry with Powdery Mildew",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 28,
+      "file": "data_distribution_for_SVM/test/24/b3e427bd-9c28-402f-87d1-23d87ee4f15e.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9824,
+      "ok": true
+    },
+    {
+      "index": 29,
+      "file": "data_distribution_for_SVM/test/0/f7b422f4-e479-41ab-85dd-146838cf92d2.JPG",
+      "expected": "Apple Scab",
+      "predicted": "Cherry with Powdery Mildew",
+      "confidence": 0.9322,
+      "ok": false
+    },
+    {
+      "index": 30,
+      "file": "data_distribution_for_SVM/test/16/a29a9cb0-732b-4b63-9b36-4ab637e31e2c.JPG",
+      "expected": "Peach with Bacterial Spot",
+      "predicted": "Peach with Bacterial Spot",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 31,
+      "file": "data_distribution_for_SVM/test/32/0cff0cc1-feca-4e1e-bc8d-0d22b2f506a9.JPG",
+      "expected": "Tomato with Septoria Leaf Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.6955,
+      "ok": false
+    },
+    {
+      "index": 32,
+      "file": "data_distribution_for_SVM/test/28/2d03b19c-1e69-4585-8c56-120fc68ceaa2.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.3837,
+      "ok": true
+    },
+    {
+      "index": 33,
+      "file": "data_distribution_for_SVM/test/24/b375db79-b2fe-4393-9b57-218773e914a0.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9903,
+      "ok": true
+    },
+    {
+      "index": 34,
+      "file": "data_distribution_for_SVM/test/16/7d33f3ac-1468-48f1-8625-0d4ebebb9dea.JPG",
+      "expected": "Peach with Bacterial Spot",
+      "predicted": "Peach with Bacterial Spot",
+      "confidence": 0.9991,
+      "ok": true
+    },
+    {
+      "index": 35,
+      "file": "data_distribution_for_SVM/test/21/0e64b13f-efbc-4d48-9815-9216151ba43b.JPG",
+      "expected": "Potato with Late Blight",
+      "predicted": "Tomato with Target Spot",
+      "confidence": 0.3598,
+      "ok": false
+    },
+    {
+      "index": 36,
+      "file": "data_distribution_for_SVM/test/28/102f31c9-9e7e-4d79-afc9-bdeb2d2c3409.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.993,
+      "ok": true
+    },
+    {
+      "index": 37,
+      "file": "data_distribution_for_SVM/test/15/699a76da-4b1c-45a0-a89f-61ce9ea5888e.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 38,
+      "file": "data_distribution_for_SVM/test/15/4618f793-04db-478e-ad12-ee729b682460.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9973,
+      "ok": true
+    },
+    {
+      "index": 39,
+      "file": "data_distribution_for_SVM/test/3/5c9cce65-5783-4d83-8a70-ced5dacb71db.JPG",
+      "expected": "Healthy Apple",
+      "predicted": "Healthy Apple",
+      "confidence": 0.9956,
+      "ok": true
+    },
+    {
+      "index": 40,
+      "file": "data_distribution_for_SVM/test/15/53eb655b-141c-4c9c-96cc-91eb45dbc885.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 41,
+      "file": "data_distribution_for_SVM/test/28/e3ef85e4-7582-4fb7-a741-6d5ae214677c.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 42,
+      "file": "data_distribution_for_SVM/test/28/5087b0b8-e104-4bbf-a07c-59ba3db8a23d.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.9628,
+      "ok": true
+    },
+    {
+      "index": 43,
+      "file": "data_distribution_for_SVM/test/6/83cc56f9-beb8-4f92-9a49-d4e2822158cf.JPG",
+      "expected": "Healthy Cherry Plant",
+      "predicted": "Healthy Cherry Plant",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 44,
+      "file": "data_distribution_for_SVM/test/24/739e88a6-f0ff-4421-bd43-3e6ba4d80d13.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Bell Pepper Plant",
+      "confidence": 0.6237,
+      "ok": false
+    },
+    {
+      "index": 45,
+      "file": "data_distribution_for_SVM/test/12/4a4d6c14-871b-4b65-8294-31793db89a16.JPG",
+      "expected": "Grape with Esca (Black Measles)",
+      "predicted": "Grape with Esca (Black Measles)",
+      "confidence": 0.9986,
+      "ok": true
+    },
+    {
+      "index": 46,
+      "file": "data_distribution_for_SVM/test/33/ef59904c-0c8a-4da5-b5b1-ab7413bf4d28.JPG",
+      "expected": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.9989,
+      "ok": true
+    },
+    {
+      "index": 47,
+      "file": "data_distribution_for_SVM/test/35/e1f51c00-67de-4681-aaa5-92c34f1485f2.JPG",
+      "expected": "Tomato Yellow Leaf Curl Virus",
+      "predicted": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 48,
+      "file": "data_distribution_for_SVM/test/15/bd16c9a3-afcd-4c98-9362-466eaf80eda0.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9981,
+      "ok": true
+    },
+    {
+      "index": 49,
+      "file": "data_distribution_for_SVM/test/3/4399eab0-9322-4fc4-ae7c-7e38e18cc9fc.JPG",
+      "expected": "Healthy Apple",
+      "predicted": "Healthy Apple",
+      "confidence": 0.9118,
+      "ok": true
+    },
+    {
+      "index": 50,
+      "file": "data_distribution_for_SVM/test/15/18c66cbc-a3a5-42de-9c2a-1dd6b8f2a169.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9994,
+      "ok": true
+    },
+    {
+      "index": 51,
+      "file": "data_distribution_for_SVM/test/37/2561d35a-3b66-411d-adfc-de33d6336af4.JPG",
+      "expected": "Healthy Tomato Plant",
+      "predicted": "Healthy Tomato Plant",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 52,
+      "file": "data_distribution_for_SVM/test/24/fea55517-5db6-4424-b810-c7eab5d61c29.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9719,
+      "ok": true
+    },
+    {
+      "index": 53,
+      "file": "data_distribution_for_SVM/test/8/decd06c3-6534-4884-843f-43768e2c7f48.JPG",
+      "expected": "Corn (Maize) with Common Rust",
+      "predicted": "Corn (Maize) with Common Rust",
+      "confidence": 0.9996,
+      "ok": true
+    },
+    {
+      "index": 54,
+      "file": "data_distribution_for_SVM/test/8/344caf65-ace5-4d74-a45c-c836a8d3ed39.JPG",
+      "expected": "Corn (Maize) with Common Rust",
+      "predicted": "Corn (Maize) with Common Rust",
+      "confidence": 0.9977,
+      "ok": true
+    },
+    {
+      "index": 55,
+      "file": "data_distribution_for_SVM/test/28/f83e4675-2c03-4adf-b881-f2d0e6bdf9ac.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 56,
+      "file": "data_distribution_for_SVM/test/4/95b7b472-2431-46c1-b628-e241efacd51a.JPG",
+      "expected": "Healthy Blueberry Plant",
+      "predicted": "Healthy Blueberry Plant",
+      "confidence": 0.9982,
+      "ok": true
+    },
+    {
+      "index": 57,
+      "file": "data_distribution_for_SVM/test/19/c45ef52a-a415-4e41-8bb2-37a3e23e3aae.JPG",
+      "expected": "Healthy Bell Pepper Plant",
+      "predicted": "Healthy Bell Pepper Plant",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 58,
+      "file": "data_distribution_for_SVM/test/14/95337f2d-8716-4ad6-b46a-3439772d058b.JPG",
+      "expected": "Healthy Grape Plant",
+      "predicted": "Healthy Grape Plant",
+      "confidence": 0.9989,
+      "ok": true
+    },
+    {
+      "index": 59,
+      "file": "data_distribution_for_SVM/test/12/6f41547d-1e63-40e8-b832-616f5b3b8ff0.JPG",
+      "expected": "Grape with Esca (Black Measles)",
+      "predicted": "Grape with Esca (Black Measles)",
+      "confidence": 0.9993,
+      "ok": true
+    },
+    {
+      "index": 60,
+      "file": "data_distribution_for_SVM/test/23/03f27c5c-016a-4302-9c7d-62b49554e2ab.JPG",
+      "expected": "Healthy Raspberry Plant",
+      "predicted": "Healthy Raspberry Plant",
+      "confidence": 0.9988,
+      "ok": true
+    },
+    {
+      "index": 61,
+      "file": "data_distribution_for_SVM/test/24/eec780ba-ad81-4b44-9fcb-0cd27db20188.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 62,
+      "file": "data_distribution_for_SVM/test/15/1e7da0c0-304b-4fd1-8fd7-98bd1e57b48e.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 63,
+      "file": "data_distribution_for_SVM/test/23/78365c2d-8ff9-4280-aa25-125dd64e3b90.JPG",
+      "expected": "Healthy Raspberry Plant",
+      "predicted": "Healthy Raspberry Plant",
+      "confidence": 0.9931,
+      "ok": true
+    },
+    {
+      "index": 64,
+      "file": "data_distribution_for_SVM/test/15/64df331f-da73-4275-84b1-7e43c4b28773.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 65,
+      "file": "data_distribution_for_SVM/test/3/5dfade7a-05da-49d3-98b2-211b1973e50c.JPG",
+      "expected": "Healthy Apple",
+      "predicted": "Healthy Apple",
+      "confidence": 0.9993,
+      "ok": true
+    },
+    {
+      "index": 66,
+      "file": "data_distribution_for_SVM/test/24/b3b5d239-60ea-4c7d-8389-8a05a8551e38.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9977,
+      "ok": true
+    },
+    {
+      "index": 67,
+      "file": "data_distribution_for_SVM/test/33/a075d2b1-0b8b-47c7-9441-38035ddf0913.JPG",
+      "expected": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "predicted": "Tomato with Spider Mites or Two-spotted Spider Mite",
+      "confidence": 0.9958,
+      "ok": true
+    },
+    {
+      "index": 68,
+      "file": "data_distribution_for_SVM/test/9/68269f84-58b9-4e5d-8d78-ddeb5300044b.JPG",
+      "expected": "Corn (Maize) with Northern Leaf Blight",
+      "predicted": "Corn (Maize) with Northern Leaf Blight",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 69,
+      "file": "data_distribution_for_SVM/test/29/2f59d5da-109e-4762-84da-f5a3c89bf70c.JPG",
+      "expected": "Tomato with Early Blight",
+      "predicted": "Tomato with Early Blight",
+      "confidence": 0.9457,
+      "ok": true
+    },
+    {
+      "index": 70,
+      "file": "data_distribution_for_SVM/test/16/c4479fc1-6e23-4161-965f-24964484a570.JPG",
+      "expected": "Peach with Bacterial Spot",
+      "predicted": "Peach with Bacterial Spot",
+      "confidence": 0.8695,
+      "ok": true
+    },
+    {
+      "index": 71,
+      "file": "data_distribution_for_SVM/test/29/adfe0d7a-c12f-445f-b84c-d11e1b423964.JPG",
+      "expected": "Tomato with Early Blight",
+      "predicted": "Tomato with Early Blight",
+      "confidence": 0.7041,
+      "ok": true
+    },
+    {
+      "index": 72,
+      "file": "data_distribution_for_SVM/test/28/c9b89e6c-1324-4712-bd29-3c07fac2b357.JPG",
+      "expected": "Tomato with Bacterial Spot",
+      "predicted": "Tomato with Bacterial Spot",
+      "confidence": 0.9841,
+      "ok": true
+    },
+    {
+      "index": 73,
+      "file": "data_distribution_for_SVM/test/20/af5ed67b-9c54-4dbf-94a1-3fb252a09fa5.JPG",
+      "expected": "Potato with Early Blight",
+      "predicted": "Potato with Early Blight",
+      "confidence": 0.9874,
+      "ok": true
+    },
+    {
+      "index": 74,
+      "file": "data_distribution_for_SVM/test/24/7df47634-e13b-45e4-91c8-2a5a61801966.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 75,
+      "file": "data_distribution_for_SVM/test/15/012f17ab-9bac-4732-900b-2e612ee51939.JPG",
+      "expected": "Orange with Citrus Greening",
+      "predicted": "Orange with Citrus Greening",
+      "confidence": 1.0,
+      "ok": true
+    },
+    {
+      "index": 76,
+      "file": "data_distribution_for_SVM/test/6/f7cd56a1-b4c9-4076-a6d0-351a44250e1c.JPG",
+      "expected": "Healthy Cherry Plant",
+      "predicted": "Healthy Cherry Plant",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 77,
+      "file": "data_distribution_for_SVM/test/9/5ec8294e-194e-4b7f-8a4a-ebb430b23e1f.JPG",
+      "expected": "Corn (Maize) with Northern Leaf Blight",
+      "predicted": "Corn (Maize) with Northern Leaf Blight",
+      "confidence": 0.9985,
+      "ok": true
+    },
+    {
+      "index": 78,
+      "file": "data_distribution_for_SVM/test/18/1441a175-76a2-46d6-ae5a-8d5d86e7c9b2.JPG",
+      "expected": "Bell Pepper with Bacterial Spot",
+      "predicted": "Bell Pepper with Bacterial Spot",
+      "confidence": 0.9987,
+      "ok": true
+    },
+    {
+      "index": 79,
+      "file": "data_distribution_for_SVM/test/35/da74c8a7-34cd-42e0-aede-b81b64984b70.JPG",
+      "expected": "Tomato Yellow Leaf Curl Virus",
+      "predicted": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 80,
+      "file": "data_distribution_for_SVM/test/24/173d3d48-4b0b-4274-b489-87e9a6ed0316.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9459,
+      "ok": true
+    },
+    {
+      "index": 81,
+      "file": "data_distribution_for_SVM/test/16/c9f045b2-977b-42f1-8c9b-0a1f7fe6c06d.JPG",
+      "expected": "Peach with Bacterial Spot",
+      "predicted": "Peach with Bacterial Spot",
+      "confidence": 0.9985,
+      "ok": true
+    },
+    {
+      "index": 82,
+      "file": "data_distribution_for_SVM/test/34/10e83045-424b-4263-9296-add59d4d4d5a.JPG",
+      "expected": "Tomato with Target Spot",
+      "predicted": "Tomato with Target Spot",
+      "confidence": 0.9974,
+      "ok": true
+    },
+    {
+      "index": 83,
+      "file": "data_distribution_for_SVM/test/3/544947da-e5a3-4e2a-8b51-1a035b63becd.JPG",
+      "expected": "Healthy Apple",
+      "predicted": "Healthy Apple",
+      "confidence": 0.4493,
+      "ok": true
+    },
+    {
+      "index": 84,
+      "file": "data_distribution_for_SVM/test/24/8f9568ba-3efe-4165-ad77-da97176406bf.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9984,
+      "ok": true
+    },
+    {
+      "index": 85,
+      "file": "data_distribution_for_SVM/test/9/b69a6a13-7ba6-411c-bfae-f86a880fd48d.JPG",
+      "expected": "Corn (Maize) with Northern Leaf Blight",
+      "predicted": "Corn (Maize) with Northern Leaf Blight",
+      "confidence": 0.9993,
+      "ok": true
+    },
+    {
+      "index": 86,
+      "file": "data_distribution_for_SVM/test/37/6696043c-327f-4fd0-aa45-c8d4b1cfd058.JPG",
+      "expected": "Healthy Tomato Plant",
+      "predicted": "Healthy Tomato Plant",
+      "confidence": 0.9997,
+      "ok": true
+    },
+    {
+      "index": 87,
+      "file": "data_distribution_for_SVM/test/21/644410f5-683c-4a1a-833a-94355d524806.JPG",
+      "expected": "Potato with Late Blight",
+      "predicted": "Potato with Late Blight",
+      "confidence": 0.9839,
+      "ok": true
+    },
+    {
+      "index": 88,
+      "file": "data_distribution_for_SVM/test/26/ac41a6d2-80b5-402f-bb99-bac8e7fa12f6.JPG",
+      "expected": "Strawberry with Leaf Scorch",
+      "predicted": "Strawberry with Leaf Scorch",
+      "confidence": 0.9983,
+      "ok": true
+    },
+    {
+      "index": 89,
+      "file": "data_distribution_for_SVM/test/13/3bb05f8d-2eda-42e5-9ce5-c213ca9c8b65.JPG",
+      "expected": "Grape with Isariopsis Leaf Spot",
+      "predicted": "Grape with Isariopsis Leaf Spot",
+      "confidence": 0.9992,
+      "ok": true
+    },
+    {
+      "index": 90,
+      "file": "data_distribution_for_SVM/test/23/24194394-9870-4f79-ae70-15c365a57cdc.JPG",
+      "expected": "Healthy Raspberry Plant",
+      "predicted": "Healthy Raspberry Plant",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 91,
+      "file": "data_distribution_for_SVM/test/11/883228f6-66b2-4563-9ba1-b086d2eb0898.JPG",
+      "expected": "Grape with Black Rot",
+      "predicted": "Grape with Black Rot",
+      "confidence": 0.9987,
+      "ok": true
+    },
+    {
+      "index": 92,
+      "file": "data_distribution_for_SVM/test/25/f3c43005-ccec-4438-b991-1fc85269dd8f.JPG",
+      "expected": "Squash with Powdery Mildew",
+      "predicted": "Squash with Powdery Mildew",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 93,
+      "file": "data_distribution_for_SVM/test/30/838eef74-3db6-4915-94fc-6b6d1dfe363e.JPG",
+      "expected": "Tomato with Late Blight",
+      "predicted": "Tomato with Late Blight",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 94,
+      "file": "data_distribution_for_SVM/test/24/82361bc9-7651-407c-ae36-39163a5c11e7.JPG",
+      "expected": "Healthy Soybean Plant",
+      "predicted": "Healthy Soybean Plant",
+      "confidence": 0.9488,
+      "ok": true
+    },
+    {
+      "index": 95,
+      "file": "data_distribution_for_SVM/test/13/fce6133c-62fb-4fde-9b81-743edfb66de2.JPG",
+      "expected": "Grape with Isariopsis Leaf Spot",
+      "predicted": "Grape with Isariopsis Leaf Spot",
+      "confidence": 0.9885,
+      "ok": true
+    },
+    {
+      "index": 96,
+      "file": "data_distribution_for_SVM/test/20/cec8d744-1aa0-442d-b00d-beb2069eacfa.JPG",
+      "expected": "Potato with Early Blight",
+      "predicted": "Tomato with Septoria Leaf Spot",
+      "confidence": 0.3915,
+      "ok": false
+    },
+    {
+      "index": 97,
+      "file": "data_distribution_for_SVM/test/37/e1e7ccc2-9afc-469a-9bde-419bef8c6441.JPG",
+      "expected": "Healthy Tomato Plant",
+      "predicted": "Healthy Tomato Plant",
+      "confidence": 0.9998,
+      "ok": true
+    },
+    {
+      "index": 98,
+      "file": "data_distribution_for_SVM/test/25/e3c90743-59c8-40a6-bfea-fe38fecc83e0.JPG",
+      "expected": "Squash with Powdery Mildew",
+      "predicted": "Squash with Powdery Mildew",
+      "confidence": 0.9999,
+      "ok": true
+    },
+    {
+      "index": 99,
+      "file": "data_distribution_for_SVM/test/20/ea2e6276-13cc-4e1c-bb2a-99b475fe97d3.JPG",
+      "expected": "Potato with Early Blight",
+      "predicted": "Potato with Early Blight",
+      "confidence": 0.9729,
+      "ok": true
+    },
+    {
+      "index": 100,
+      "file": "data_distribution_for_SVM/test/35/4ea6efce-16f8-4d06-991d-47513d07fa12.JPG",
+      "expected": "Tomato Yellow Leaf Curl Virus",
+      "predicted": "Tomato Yellow Leaf Curl Virus",
+      "confidence": 0.9631,
+      "ok": true
+    }
+  ]
+}
