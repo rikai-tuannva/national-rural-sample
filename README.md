@@ -95,7 +95,51 @@ Kỳ vọng:
 
 ---
 
-## 5. Cài môi trường mobile
+## 5. Tải PlantVillage-Dataset cho benchmark trong `tester/`
+
+Các script benchmark trong `tester/` kỳ vọng dataset nằm tại:
+
+```text
+tester/PlantVillage-Dataset/data_distribution_for_SVM/test
+```
+
+Nguồn dataset tham chiếu:
+- `https://github.com/spMohanty/PlantVillage-Dataset`
+
+### Cách tải nhanh phần test set bằng sparse checkout
+
+Từ root repo:
+
+```bash
+git clone --filter=blob:none --no-checkout https://github.com/spMohanty/PlantVillage-Dataset.git tester/PlantVillage-Dataset
+cd tester/PlantVillage-Dataset
+git sparse-checkout init --cone
+git sparse-checkout set data_distribution_for_SVM/test
+git checkout master
+```
+
+Sau khi xong, cấu trúc tối thiểu cần có là:
+
+```text
+tester/
+  PlantVillage-Dataset/
+    data_distribution_for_SVM/
+      test/
+        0/
+        1/
+        ...
+        37/
+```
+
+### Lưu ý
+
+- repo này **không commit dataset** lên git
+- nếu thiếu dataset, các script benchmark trong `tester/` sẽ không chạy được
+- chỉ cần checkout phần `data_distribution_for_SVM/test` là đủ cho benchmark hiện tại
+
+---
+
+## 6. Cài môi trường mobile
 
 Từ thư mục `mobile/`:
 
@@ -112,9 +156,9 @@ flutter test
 
 ---
 
-## 6. Chạy app trong môi trường test/dev
+## 7. Chạy app trong môi trường test/dev
 
-## 6.1. Chạy web để review nhanh UI
+## 7.1. Chạy web để review nhanh UI
 
 Từ thư mục `mobile/`:
 
@@ -135,7 +179,7 @@ flutter run -d web-server --web-hostname 0.0.0.0 --web-port 3001
 
 ---
 
-## 6.2. Chạy trên Android thật
+## 7.2. Chạy trên Android thật
 
 ### Bước 1: kiểm tra thiết bị
 
@@ -174,7 +218,7 @@ Khi đã có `adb reverse`, điện thoại sẽ gọi về backend local qua đ
 
 ---
 
-## 6.3. Nếu muốn chạy qua LAN thay vì `adb reverse`
+## 7.3. Nếu muốn chạy qua LAN thay vì `adb reverse`
 
 Backend có thể chạy trên LAN, ví dụ:
 
@@ -191,7 +235,7 @@ Khuyến nghị:
 
 ---
 
-## 7. Luồng test thủ công cơ bản
+## 8. Luồng test thủ công cơ bản
 
 1. chạy backend local
 2. chạy app Flutter
@@ -211,7 +255,7 @@ Khuyến nghị:
 
 ---
 
-## 8. Batch test trong app
+## 9. Batch test trong app
 
 App có batch mode để test nhiều ảnh mẫu liên tiếp.
 
@@ -233,7 +277,7 @@ Các file đáng xem:
 
 ---
 
-## 9. Smart crop hiện tại
+## 10. Smart crop hiện tại
 
 Batch/test flow đã được cải thiện bằng **smart crop** để giữ nhiều ngữ cảnh lá hơn:
 
@@ -247,7 +291,7 @@ Mục tiêu:
 
 ---
 
-## 10. API contract ngắn
+## 11. API contract ngắn
 
 ### `GET /health`
 
@@ -293,7 +337,7 @@ Response error ví dụ:
 
 ---
 
-## 11. Một số lỗi hay gặp
+## 12. Một số lỗi hay gặp
 
 ### 11.1. App Android gọi backend bị timeout
 
@@ -330,7 +374,7 @@ Kiểm tra:
 
 ---
 
-## 12. Gợi ý chạy lại demo từ đầu
+## 13. Gợi ý chạy lại demo từ đầu
 
 ### Terminal 1
 
@@ -361,7 +405,35 @@ Sau đó trên app:
 
 ---
 
-## 13. Ghi chú cuối
+## 14. Benchmark bằng script trong `tester/`
+
+Sau khi đã có dataset ở đúng chỗ và backend đang chạy tại `http://127.0.0.1:8000`, có thể chạy:
+
+### Benchmark ảnh gốc
+
+```bash
+cd tester
+python3 run_plantvillage_benchmark.py
+```
+
+### Benchmark random crop
+
+```bash
+cd tester
+python3 run_plantvillage_random_crop_benchmark.py --sample-size 15 --seed 4242 --min-crop-ratio 0.3 --max-crop-ratio 0.8
+```
+
+### Ghi chú
+
+- các file JSON kết quả sẽ được ghi trong thư mục `tester/`
+- `expected_label` trong report lấy từ ground truth của dataset hoặc manifest batch asset, không phải từ model
+- xem thêm:
+  - `tester/README.md`
+  - `tester/report-field-explanation.md`
+
+---
+
+## 15. Ghi chú cuối
 
 Repo này đang phục vụ mục tiêu **demo + test**.
 
