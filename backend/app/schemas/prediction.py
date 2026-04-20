@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class PredictionItem(BaseModel):
     label: str
+    label_en: str
     confidence: float
 
 

@@ -5,6 +5,47 @@ from threading import Lock
 
 from PIL import Image
 
+LABEL_JA_MAP = {
+    "Apple Scab": "リンゴ黒星病",
+    "Apple with Black Rot": "リンゴ黒腐病",
+    "Cedar Apple Rust": "リンゴ赤さび病",
+    "Healthy Apple": "健全なリンゴ",
+    "Healthy Blueberry Plant": "健全なブルーベリー",
+    "Cherry with Powdery Mildew": "サクランボうどんこ病",
+    "Healthy Cherry Plant": "健全なサクランボ",
+    "Corn (Maize) with Cercospora and Gray Leaf Spot": "トウモロコシ 灰色斑点病",
+    "Corn (Maize) with Common Rust": "トウモロコシ さび病",
+    "Corn (Maize) with Northern Leaf Blight": "トウモロコシ 北部葉枯病",
+    "Healthy Corn (Maize) Plant": "健全なトウモロコシ",
+    "Grape with Black Rot": "ブドウ黒腐病",
+    "Grape with Esca (Black Measles)": "ブドウ エスカ病",
+    "Grape with Isariopsis Leaf Spot": "ブドウ 葉斑病",
+    "Healthy Grape Plant": "健全なブドウ",
+    "Orange with Citrus Greening": "オレンジ 柑橘グリーニング病",
+    "Peach with Bacterial Spot": "モモ斑点細菌病",
+    "Healthy Peach Plant": "健全なモモ",
+    "Bell Pepper with Bacterial Spot": "ピーマン斑点細菌病",
+    "Healthy Bell Pepper Plant": "健全なピーマン",
+    "Potato with Early Blight": "ジャガイモ 早疫病",
+    "Potato with Late Blight": "ジャガイモ 疫病",
+    "Healthy Potato Plant": "健全なジャガイモ",
+    "Healthy Raspberry Plant": "健全なラズベリー",
+    "Healthy Soybean Plant": "健全なダイズ",
+    "Squash with Powdery Mildew": "カボチャ うどんこ病",
+    "Strawberry with Leaf Scorch": "イチゴ 葉焼け病",
+    "Healthy Strawberry Plant": "健全なイチゴ",
+    "Tomato with Bacterial Spot": "トマト斑点細菌病",
+    "Tomato with Early Blight": "トマト 早疫病",
+    "Tomato with Late Blight": "トマト 疫病",
+    "Tomato with Leaf Mold": "トマト 葉かび病",
+    "Tomato with Septoria Leaf Spot": "トマト セプトリア葉斑病",
+    "Tomato with Spider Mites or Two-spotted Spider Mite": "トマト ハダニ被害",
+    "Tomato with Target Spot": "トマト ターゲットスポット病",
+    "Tomato Yellow Leaf Curl Virus": "トマト 黄化葉巻病",
+    "Tomato Mosaic Virus": "トマト モザイク病",
+    "Healthy Tomato Plant": "健全なトマト",
+}
+
 try:
     import torch
     from transformers import AutoImageProcessor, AutoModelForImageClassification
@@ -51,6 +92,12 @@ class InferenceService:
                 int(key): value for key, value in self._model.config.id2label.items()
             }
 
+    def _localize_label(self, english_label: str) -> dict[str, str]:
+        return {
+            "label": LABEL_JA_MAP.get(english_label, english_label),
+            "label_en": english_label,
+        }
+
     def predict_from_bytes(self, image_bytes: bytes) -> dict:
         self.load()
 
@@ -70,7 +117,7 @@ class InferenceService:
 
         top_k = [
             {
-                "label": self._id2label.get(int(index), str(int(index))),
+                **self._localize_label(self._id2label.get(int(index), str(int(index)))),
                 "confidence": round(float(score), 4),
             }
             for score, index in zip(scores.tolist(), indices.tolist(), strict=False)

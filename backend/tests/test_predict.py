@@ -15,16 +15,19 @@ class FakeInferenceService:
         return {
             "success": True,
             "prediction": {
-                "label": "Healthy Tomato Plant",
+                "label": "健全なトマト",
+                "label_en": "Healthy Tomato Plant",
                 "confidence": 0.9876,
             },
             "top_k": [
                 {
-                    "label": "Healthy Tomato Plant",
+                    "label": "健全なトマト",
+                    "label_en": "Healthy Tomato Plant",
                     "confidence": 0.9876,
                 },
                 {
-                    "label": "Tomato with Early Blight",
+                    "label": "トマト 早疫病",
+                    "label_en": "Tomato with Early Blight",
                     "confidence": 0.0124,
                 },
             ],
@@ -52,7 +55,10 @@ def test_predict_returns_prediction_response():
     assert response.status_code == 200
     body = response.json()
     assert body["success"] is True
-    assert body["prediction"]["label"] == "Healthy Tomato Plant"
+    assert body["prediction"]["label"] == "健全なトマト"
+    assert body["prediction"]["label_en"] == "Healthy Tomato Plant"
+    assert body["top_k"][1]["label"] == "トマト 早疫病"
+    assert body["top_k"][1]["label_en"] == "Tomato with Early Blight"
     assert len(body["top_k"]) == 2
 
 

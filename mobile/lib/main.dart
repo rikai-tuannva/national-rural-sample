@@ -383,7 +383,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          prediction.prediction.japaneseLabel,
+                          prediction.prediction.label,
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w800,
                             color: const Color(0xFF166534),
@@ -414,7 +414,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                       color: Colors.white,
                       child: ListTile(
                         leading: CircleAvatar(child: Text('${index + 1}')),
-                        title: Text(item.japaneseLabel),
+                        title: Text(item.label),
                         subtitle: Text('信頼度: ${_formatConfidence(item.confidence)}'),
                       ),
                     );
@@ -525,58 +525,21 @@ class PredictionResponse {
 }
 
 class PredictionItem {
-  PredictionItem({required this.label, required this.confidence});
+  PredictionItem({
+    required this.label,
+    required this.labelEn,
+    required this.confidence,
+  });
 
   final String label;
+  final String labelEn;
   final double confidence;
-
-  String get japaneseLabel => labelJaMap[label] ?? label;
 
   factory PredictionItem.fromJson(Map<String, dynamic> json) {
     return PredictionItem(
       label: (json['label'] ?? 'Unknown').toString(),
+      labelEn: (json['label_en'] ?? json['label'] ?? 'Unknown').toString(),
       confidence: (json['confidence'] as num? ?? 0).toDouble(),
     );
   }
 }
-
-const Map<String, String> labelJaMap = {
-  'Apple Scab': 'リンゴ黒星病',
-  'Apple with Black Rot': 'リンゴ黒腐病',
-  'Cedar Apple Rust': 'リンゴ赤さび病',
-  'Healthy Apple': '健全なリンゴ',
-  'Healthy Blueberry Plant': '健全なブルーベリー',
-  'Cherry with Powdery Mildew': 'サクランボうどんこ病',
-  'Healthy Cherry Plant': '健全なサクランボ',
-  'Corn (Maize) with Cercospora and Gray Leaf Spot': 'トウモロコシ 灰色斑点病',
-  'Corn (Maize) with Common Rust': 'トウモロコシ さび病',
-  'Corn (Maize) with Northern Leaf Blight': 'トウモロコシ 北部葉枯病',
-  'Healthy Corn (Maize) Plant': '健全なトウモロコシ',
-  'Grape with Black Rot': 'ブドウ黒腐病',
-  'Grape with Esca (Black Measles)': 'ブドウ エスカ病',
-  'Grape with Isariopsis Leaf Spot': 'ブドウ 葉斑病',
-  'Healthy Grape Plant': '健全なブドウ',
-  'Orange with Citrus Greening': 'オレンジ 柑橘グリーニング病',
-  'Peach with Bacterial Spot': 'モモ斑点細菌病',
-  'Healthy Peach Plant': '健全なモモ',
-  'Bell Pepper with Bacterial Spot': 'ピーマン斑点細菌病',
-  'Healthy Bell Pepper Plant': '健全なピーマン',
-  'Potato with Early Blight': 'ジャガイモ 早疫病',
-  'Potato with Late Blight': 'ジャガイモ 疫病',
-  'Healthy Potato Plant': '健全なジャガイモ',
-  'Healthy Raspberry Plant': '健全なラズベリー',
-  'Healthy Soybean Plant': '健全なダイズ',
-  'Squash with Powdery Mildew': 'カボチャ うどんこ病',
-  'Strawberry with Leaf Scorch': 'イチゴ 葉焼け病',
-  'Healthy Strawberry Plant': '健全なイチゴ',
-  'Tomato with Bacterial Spot': 'トマト斑点細菌病',
-  'Tomato with Early Blight': 'トマト 早疫病',
-  'Tomato with Late Blight': 'トマト 疫病',
-  'Tomato with Leaf Mold': 'トマト 葉かび病',
-  'Tomato with Septoria Leaf Spot': 'トマト セプトリア葉斑病',
-  'Tomato with Spider Mites or Two-spotted Spider Mite': 'トマト ハダニ被害',
-  'Tomato with Target Spot': 'トマト ターゲットスポット病',
-  'Tomato Yellow Leaf Curl Virus': 'トマト 黄化葉巻病',
-  'Tomato Mosaic Virus': 'トマト モザイク病',
-  'Healthy Tomato Plant': '健全なトマト',
-};
