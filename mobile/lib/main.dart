@@ -1,17 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(const NationalRuralSampleApp());
@@ -24,7 +21,7 @@ class NationalRuralSampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'National Rural Sample',
+      title: '植物病害診断デモ',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2F855A)),
         scaffoldBackgroundColor: const Color(0xFFF7FAFC),
@@ -48,17 +45,10 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
   final ImagePicker _imagePicker = ImagePicker();
   final TextEditingController _apiController =
       TextEditingController(text: _defaultApiBaseUrl);
-  static const int _batchSeed = 20260416;
-  final Random _random = Random(_batchSeed);
-  static const List<int> _batchSizeOptions = [10, 15, 25, 40, 50, 65];
 
   File? _selectedImage;
-  PredictionResponse? _prediction;
   String? _errorMessage;
   bool _isSubmitting = false;
-  bool _isBatchRunning = false;
-  int _selectedBatchSize = 50;
-  BatchRunSummary? _batchSummary;
 
   @override
   void dispose() {
@@ -66,13 +56,15 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     super.dispose();
   }
 
+  bool get _isBusy => _isSubmitting;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Plant Disease Demo'),
+        title: const Text('植物病害診断デモ'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -86,7 +78,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Backend API',
+                      'バックエンド API',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -96,7 +88,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                       controller: _apiController,
                       keyboardType: TextInputType.url,
                       decoration: const InputDecoration(
-                        labelText: 'API base URL',
+                        labelText: 'API ベース URL',
                         hintText: 'http://192.168.10.97:8000',
                         border: OutlineInputBorder(),
                       ),
@@ -110,14 +102,14 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      '1. Chọn nguồn ảnh',
+                      '1. 画像を選択',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Ảnh là tình trạng bệnh của một loại cây nông nghiệp bất kỳ. Có thể chụp ảnh mới hoặc chọn từ thư viện, rồi crop / rotate trước khi submit.',
+                      '作物の病害が写っている画像を選択してください。カメラ撮影またはギャラリー選択後、必要に応じて切り抜き・回転してから送信できます。',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: Colors.black54,
                         height: 1.4,
@@ -132,7 +124,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                                 ? null
                                 : () => _pickImage(ImageSource.camera),
                             icon: const Icon(Icons.photo_camera_outlined),
-                            label: const Text('Chụp ảnh'),
+                            label: const Text('写真を撮る'),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -142,7 +134,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                                 ? null
                                 : () => _pickImage(ImageSource.gallery),
                             icon: const Icon(Icons.photo_library_outlined),
-                            label: const Text('Chọn từ thư viện'),
+                            label: const Text('ギャラリーから選ぶ'),
                           ),
                         ),
                       ],
@@ -159,21 +151,21 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                               ? null
                               : _cropSelectedImage,
                           icon: const Icon(Icons.crop),
-                          label: const Text('Crop'),
+                          label: const Text('切り抜き'),
                         ),
                         OutlinedButton.icon(
                           onPressed: _selectedImage == null || _isBusy
                               ? null
                               : () => _rotateSelectedImage(clockwise: false),
                           icon: const Icon(Icons.rotate_left),
-                          label: const Text('Rotate trái'),
+                          label: const Text('左回転'),
                         ),
                         OutlinedButton.icon(
                           onPressed: _selectedImage == null || _isBusy
                               ? null
                               : () => _rotateSelectedImage(clockwise: true),
                           icon: const Icon(Icons.rotate_right),
-                          label: const Text('Rotate phải'),
+                          label: const Text('右回転'),
                         ),
                       ],
                     ),
@@ -189,74 +181,8 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Icon(Icons.send_outlined),
-                      label: Text(_isSubmitting ? 'Đang phân tích...' : 'Submit'),
+                      label: Text(_isSubmitting ? '診断中...' : '診断する'),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _SectionCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      '2. Batch test trên app mobile',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Chạy tự động trên pool 200 ảnh mẫu: app sẽ random đúng số lượng đã chọn, crop ngẫu nhiên, rotate ngẫu nhiên rồi submit lên backend để lấy kết quả tổng hợp.',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.black54,
-                        height: 1.4,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: _batchSizeOptions.map((size) {
-                        final selected = size == _selectedBatchSize;
-                        return ChoiceChip(
-                          label: Text('$size ảnh'),
-                          selected: selected,
-                          onSelected: _isBusy
-                              ? null
-                              : (_) {
-                                  setState(() {
-                                    _selectedBatchSize = size;
-                                  });
-                                },
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 12),
-                    FilledButton.tonalIcon(
-                      onPressed: _isBusy ? null : _runBatchFlow,
-                      icon: _isBatchRunning
-                          ? const SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.auto_awesome_motion_outlined),
-                      label: Text(
-                        _isBatchRunning
-                            ? 'Đang chạy batch $_selectedBatchSize ảnh...'
-                            : 'Chạy batch $_selectedBatchSize ảnh',
-                      ),
-                    ),
-                    if (_batchSummary != null) ...[
-                      const SizedBox(height: 16),
-                      _buildBatchSummary(theme, _batchSummary!),
-                      const SizedBox(height: 12),
-                      SelectableText(
-                        'Log file: ${_batchSummary!.logPath}',
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
                   ],
                 ),
               ),
@@ -272,22 +198,12 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
                     ),
                   ),
                 ),
-              if (_errorMessage != null) const SizedBox(height: 16),
-              _SectionCard(
-                child: _prediction == null
-                    ? const Text(
-                        'Chưa có kết quả. Hãy chọn ảnh, crop/rotate nếu cần rồi submit.',
-                      )
-                    : _buildPredictionView(theme, _prediction!),
-              ),
             ],
           ),
         ),
       ),
     );
   }
-
-  bool get _isBusy => _isSubmitting || _isBatchRunning;
 
   Widget _buildImagePreview() {
     if (_selectedImage == null) {
@@ -299,7 +215,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
           color: Colors.white,
         ),
         child: const Center(
-          child: Text('Chưa có ảnh nào được chọn'),
+          child: Text('まだ画像が選択されていません'),
         ),
       );
     }
@@ -315,114 +231,9 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     );
   }
 
-  Widget _buildPredictionView(ThemeData theme, PredictionResponse prediction) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Kết quả tốt nhất',
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: const Color(0xFFF0FDF4),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                prediction.prediction.label,
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: const Color(0xFF166534),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Confidence: ${_formatConfidence(prediction.prediction.confidence)}',
-                style: theme.textTheme.titleMedium,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'Top kết quả',
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 8),
-        ...prediction.topK.asMap().entries.map(
-          (entry) {
-            final index = entry.key;
-            final item = entry.value;
-            return Card(
-              elevation: 0,
-              margin: const EdgeInsets.only(bottom: 8),
-              color: Colors.white,
-              child: ListTile(
-                leading: CircleAvatar(child: Text('${index + 1}')),
-                title: Text(item.label),
-                subtitle: Text(_formatConfidence(item.confidence)),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBatchSummary(ThemeData theme, BatchRunSummary summary) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: const Color(0xFFF8FAFC),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Batch result',
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text('Tổng ảnh: ${summary.total}'),
-          Text('Đúng: ${summary.correct}'),
-          Text('Sai: ${summary.total - summary.correct}'),
-          Text('Accuracy: ${(summary.accuracy * 100).toStringAsFixed(2)}%'),
-          const SizedBox(height: 12),
-          if (summary.failures.isNotEmpty)
-            ...summary.failures.take(10).map(
-              (failure) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  '• ${failure.assetName}: ${failure.expectedLabel} → ${failure.predictedLabel} (${_formatConfidence(failure.confidence)})',
-                  style: theme.textTheme.bodySmall,
-                ),
-              ),
-            )
-          else
-            const Text('Không có case sai trong batch này.'),
-        ],
-      ),
-    );
-  }
-
   Future<void> _pickImage(ImageSource source) async {
     setState(() {
       _errorMessage = null;
-      _prediction = null;
     });
 
     final pickedFile = await _imagePicker.pickImage(
@@ -452,13 +263,13 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
       compressQuality: 95,
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop ảnh',
+          toolbarTitle: '画像を切り抜く',
           toolbarColor: const Color(0xFF2F855A),
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
         ),
-        IOSUiSettings(title: 'Crop ảnh'),
+        IOSUiSettings(title: '画像を切り抜く'),
       ],
     );
 
@@ -468,7 +279,6 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
 
     setState(() {
       _selectedImage = File(croppedFile.path);
-      _prediction = null;
       _errorMessage = null;
     });
   }
@@ -486,7 +296,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     );
     if (rotatedBytes == null) {
       setState(() {
-        _errorMessage = 'Không thể xử lý ảnh để rotate.';
+        _errorMessage = '画像を回転できませんでした。';
       });
       return;
     }
@@ -495,7 +305,6 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
 
     setState(() {
       _selectedImage = image;
-      _prediction = null;
       _errorMessage = null;
     });
   }
@@ -509,7 +318,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     final baseUrl = _apiController.text.trim();
     if (baseUrl.isEmpty) {
       setState(() {
-        _errorMessage = 'Hãy nhập API base URL.';
+        _errorMessage = 'API ベース URL を入力してください。';
       });
       return;
     }
@@ -517,17 +326,17 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     setState(() {
       _isSubmitting = true;
       _errorMessage = null;
-      _prediction = null;
     });
 
     try {
       final response = await _predictFromFile(image);
-      setState(() {
-        _prediction = response;
-      });
+      if (!mounted) {
+        return;
+      }
+      await _showPredictionDialog(response);
     } catch (error) {
       setState(() {
-        _errorMessage = 'Không thể kết nối API: $error';
+        _errorMessage = 'API に接続できません: $error';
       });
     } finally {
       if (mounted) {
@@ -538,169 +347,91 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
     }
   }
 
-  Future<void> _runBatchFlow() async {
-    setState(() {
-      _isBatchRunning = true;
-      _errorMessage = null;
-      _batchSummary = null;
-      _prediction = null;
-    });
+  Future<void> _showPredictionDialog(PredictionResponse prediction) async {
+    if (!mounted) {
+      return;
+    }
 
-    try {
-      final manifest = await rootBundle.loadString('assets/batch_samples/manifest.csv');
-      final allLines = manifest
-          .split('\n')
-          .where((line) => line.trim().isNotEmpty)
-          .skip(1)
-          .toList();
-      final selectedLines = _pickBatchLines(allLines, _selectedBatchSize);
-
-      final tempDir = await getTemporaryDirectory();
-      final failures = <BatchFailure>[];
-      final results = <BatchResultRecord>[];
-      var correct = 0;
-
-      for (final line in selectedLines) {
-        final parts = line.split(',');
-        if (parts.length < 3) {
-          continue;
-        }
-
-        final assetName = parts[0];
-        final classId = int.parse(parts[1]);
-        final sourceName = parts[2];
-        final expectedLabel = idToLabel[classId] ?? 'Unknown';
-        final data = await rootBundle.load('assets/batch_samples/$assetName');
-        final originalBytes = data.buffer.asUint8List();
-        final croppedBytes = _cropBytesSmart(originalBytes) ?? originalBytes;
-        final rotateClockwise = _random.nextBool();
-        final rotatedBytes = _rotateBytes(
-              croppedBytes,
-              clockwise: rotateClockwise,
-            ) ??
-            croppedBytes;
-
-        final tempFile = File('${tempDir.path}/$assetName')
-          ..writeAsBytesSync(rotatedBytes, flush: true);
-
-        final prediction = await _predictFromFile(tempFile);
-        final ok = prediction.prediction.label == expectedLabel;
-        correct += ok ? 1 : 0;
-        results.add(
-          BatchResultRecord(
-            assetName: assetName,
-            sourceName: sourceName,
-            expectedLabel: expectedLabel,
-            predictedLabel: prediction.prediction.label,
-            confidence: prediction.prediction.confidence,
-            ok: ok,
-            rotatedClockwise: rotateClockwise,
-          ),
-        );
-        if (!ok) {
-          failures.add(
-            BatchFailure(
-              assetName: assetName,
-              expectedLabel: expectedLabel,
-              predictedLabel: prediction.prediction.label,
-              confidence: prediction.prediction.confidence,
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        final theme = Theme.of(context);
+        return AlertDialog(
+          title: const Text('診断結果'),
+          content: SizedBox(
+            width: 420,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '最も可能性が高い結果',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: const Color(0xFFF0FDF4),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          prediction.prediction.japaneseLabel,
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: const Color(0xFF166534),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '信頼度: ${_formatConfidence(prediction.prediction.confidence)}',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    '候補一覧',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ...prediction.topK.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
+                    return Card(
+                      elevation: 0,
+                      margin: const EdgeInsets.only(bottom: 8),
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: CircleAvatar(child: Text('${index + 1}')),
+                        title: Text(item.japaneseLabel),
+                        subtitle: Text('信頼度: ${_formatConfidence(item.confidence)}'),
+                      ),
+                    );
+                  }),
+                ],
+              ),
             ),
-          );
-        }
-      }
-
-      final logPath = await _writeBatchLog(
-        total: results.length,
-        correct: correct,
-        failures: failures,
-        results: results,
-      );
-
-      if (!mounted) {
-        return;
-      }
-
-      setState(() {
-        _batchSummary = BatchRunSummary(
-          total: results.length,
-          correct: correct,
-          failures: failures,
-          logPath: logPath,
+          ),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('閉じる'),
+            ),
+          ],
         );
-      });
-    } catch (error) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {
-        _errorMessage = 'Batch test thất bại: $error';
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isBatchRunning = false;
-        });
-      }
-    }
-  }
-
-  List<String> _pickBatchLines(List<String> lines, int size) {
-    if (lines.length <= size) {
-      return List<String>.from(lines);
-    }
-
-    final shuffled = List<String>.from(lines)
-      ..shuffle(Random(_batchSeed + size));
-    return shuffled.take(size).toList();
-  }
-
-  Future<String> _writeBatchLog({
-    required int total,
-    required int correct,
-    required List<BatchFailure> failures,
-    required List<BatchResultRecord> results,
-  }) async {
-    final tempDir = await getTemporaryDirectory();
-    final logFile = File(
-      '${tempDir.path}/batch_result_$_selectedBatchSize.json',
+      },
     );
-    final payload = {
-      'seed': _batchSeed,
-      'selected_batch_size': _selectedBatchSize,
-      'total': total,
-      'correct': correct,
-      'wrong': total - correct,
-      'accuracy': total == 0 ? 0 : correct / total,
-      'log_generated_at': DateTime.now().toIso8601String(),
-      'failures': failures
-          .map(
-            (item) => {
-              'asset_name': item.assetName,
-              'expected_label': item.expectedLabel,
-              'predicted_label': item.predictedLabel,
-              'confidence': item.confidence,
-            },
-          )
-          .toList(),
-      'results': results
-          .map(
-            (item) => {
-              'asset_name': item.assetName,
-              'source_name': item.sourceName,
-              'expected_label': item.expectedLabel,
-              'predicted_label': item.predictedLabel,
-              'confidence': item.confidence,
-              'ok': item.ok,
-              'rotated_clockwise': item.rotatedClockwise,
-            },
-          )
-          .toList(),
-    };
-    await logFile.writeAsString(
-      const JsonEncoder.withIndent('  ').convert(payload),
-      flush: true,
-    );
-    return logFile.path;
   }
 
   Future<PredictionResponse> _predictFromFile(File image) async {
@@ -725,31 +456,7 @@ class _ImageClassifierPageState extends State<ImageClassifierPage> {
       return PredictionResponse.fromJson(jsonBody);
     }
 
-    throw Exception((jsonBody['error'] ?? 'Gọi API thất bại').toString());
-  }
-
-  Uint8List? _cropBytesSmart(Uint8List bytes) {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) {
-      return null;
-    }
-
-    final cropWidth = max(1, ((decoded.width * (_random.nextDouble() * 0.2 + 0.65))).floor());
-    final cropHeight = max(1, ((decoded.height * (_random.nextDouble() * 0.2 + 0.65))).floor());
-    final maxX = max(0, decoded.width - cropWidth);
-    final maxY = max(0, decoded.height - cropHeight);
-    final centerX = maxX ~/ 2;
-    final centerY = maxY ~/ 2;
-    final jitterX = max(1, (maxX * 0.2).round());
-    final jitterY = max(1, (maxY * 0.2).round());
-    final x = maxX == 0
-        ? 0
-        : (centerX + _random.nextInt(jitterX * 2 + 1) - jitterX).clamp(0, maxX);
-    final y = maxY == 0
-        ? 0
-        : (centerY + _random.nextInt(jitterY * 2 + 1) - jitterY).clamp(0, maxY);
-    final cropped = img.copyCrop(decoded, x: x, y: y, width: cropWidth, height: cropHeight);
-    return Uint8List.fromList(img.encodeJpg(cropped, quality: 95));
+    throw Exception((jsonBody['error'] ?? 'API 呼び出しに失敗しました').toString());
   }
 
   Uint8List? _rotateBytes(Uint8List bytes, {required bool clockwise}) {
@@ -823,6 +530,8 @@ class PredictionItem {
   final String label;
   final double confidence;
 
+  String get japaneseLabel => labelJaMap[label] ?? label;
+
   factory PredictionItem.fromJson(Map<String, dynamic> json) {
     return PredictionItem(
       label: (json['label'] ?? 'Unknown').toString(),
@@ -831,93 +540,43 @@ class PredictionItem {
   }
 }
 
-class BatchRunSummary {
-  BatchRunSummary({
-    required this.total,
-    required this.correct,
-    required this.failures,
-    required this.logPath,
-  });
-
-  final int total;
-  final int correct;
-  final List<BatchFailure> failures;
-  final String logPath;
-
-  double get accuracy => total == 0 ? 0 : correct / total;
-}
-
-class BatchResultRecord {
-  BatchResultRecord({
-    required this.assetName,
-    required this.sourceName,
-    required this.expectedLabel,
-    required this.predictedLabel,
-    required this.confidence,
-    required this.ok,
-    required this.rotatedClockwise,
-  });
-
-  final String assetName;
-  final String sourceName;
-  final String expectedLabel;
-  final String predictedLabel;
-  final double confidence;
-  final bool ok;
-  final bool rotatedClockwise;
-}
-
-class BatchFailure {
-  BatchFailure({
-    required this.assetName,
-    required this.expectedLabel,
-    required this.predictedLabel,
-    required this.confidence,
-  });
-
-  final String assetName;
-  final String expectedLabel;
-  final String predictedLabel;
-  final double confidence;
-}
-
-const Map<int, String> idToLabel = {
-  0: 'Apple Scab',
-  1: 'Apple with Black Rot',
-  2: 'Cedar Apple Rust',
-  3: 'Healthy Apple',
-  4: 'Healthy Blueberry Plant',
-  5: 'Cherry with Powdery Mildew',
-  6: 'Healthy Cherry Plant',
-  7: 'Corn (Maize) with Cercospora and Gray Leaf Spot',
-  8: 'Corn (Maize) with Common Rust',
-  9: 'Corn (Maize) with Northern Leaf Blight',
-  10: 'Healthy Corn (Maize) Plant',
-  11: 'Grape with Black Rot',
-  12: 'Grape with Esca (Black Measles)',
-  13: 'Grape with Isariopsis Leaf Spot',
-  14: 'Healthy Grape Plant',
-  15: 'Orange with Citrus Greening',
-  16: 'Peach with Bacterial Spot',
-  17: 'Healthy Peach Plant',
-  18: 'Bell Pepper with Bacterial Spot',
-  19: 'Healthy Bell Pepper Plant',
-  20: 'Potato with Early Blight',
-  21: 'Potato with Late Blight',
-  22: 'Healthy Potato Plant',
-  23: 'Healthy Raspberry Plant',
-  24: 'Healthy Soybean Plant',
-  25: 'Squash with Powdery Mildew',
-  26: 'Strawberry with Leaf Scorch',
-  27: 'Healthy Strawberry Plant',
-  28: 'Tomato with Bacterial Spot',
-  29: 'Tomato with Early Blight',
-  30: 'Tomato with Late Blight',
-  31: 'Tomato with Leaf Mold',
-  32: 'Tomato with Septoria Leaf Spot',
-  33: 'Tomato with Spider Mites or Two-spotted Spider Mite',
-  34: 'Tomato with Target Spot',
-  35: 'Tomato Yellow Leaf Curl Virus',
-  36: 'Tomato Mosaic Virus',
-  37: 'Healthy Tomato Plant',
+const Map<String, String> labelJaMap = {
+  'Apple Scab': 'リンゴ黒星病',
+  'Apple with Black Rot': 'リンゴ黒腐病',
+  'Cedar Apple Rust': 'リンゴ赤さび病',
+  'Healthy Apple': '健全なリンゴ',
+  'Healthy Blueberry Plant': '健全なブルーベリー',
+  'Cherry with Powdery Mildew': 'サクランボうどんこ病',
+  'Healthy Cherry Plant': '健全なサクランボ',
+  'Corn (Maize) with Cercospora and Gray Leaf Spot': 'トウモロコシ 灰色斑点病',
+  'Corn (Maize) with Common Rust': 'トウモロコシ さび病',
+  'Corn (Maize) with Northern Leaf Blight': 'トウモロコシ 北部葉枯病',
+  'Healthy Corn (Maize) Plant': '健全なトウモロコシ',
+  'Grape with Black Rot': 'ブドウ黒腐病',
+  'Grape with Esca (Black Measles)': 'ブドウ エスカ病',
+  'Grape with Isariopsis Leaf Spot': 'ブドウ 葉斑病',
+  'Healthy Grape Plant': '健全なブドウ',
+  'Orange with Citrus Greening': 'オレンジ 柑橘グリーニング病',
+  'Peach with Bacterial Spot': 'モモ斑点細菌病',
+  'Healthy Peach Plant': '健全なモモ',
+  'Bell Pepper with Bacterial Spot': 'ピーマン斑点細菌病',
+  'Healthy Bell Pepper Plant': '健全なピーマン',
+  'Potato with Early Blight': 'ジャガイモ 早疫病',
+  'Potato with Late Blight': 'ジャガイモ 疫病',
+  'Healthy Potato Plant': '健全なジャガイモ',
+  'Healthy Raspberry Plant': '健全なラズベリー',
+  'Healthy Soybean Plant': '健全なダイズ',
+  'Squash with Powdery Mildew': 'カボチャ うどんこ病',
+  'Strawberry with Leaf Scorch': 'イチゴ 葉焼け病',
+  'Healthy Strawberry Plant': '健全なイチゴ',
+  'Tomato with Bacterial Spot': 'トマト斑点細菌病',
+  'Tomato with Early Blight': 'トマト 早疫病',
+  'Tomato with Late Blight': 'トマト 疫病',
+  'Tomato with Leaf Mold': 'トマト 葉かび病',
+  'Tomato with Septoria Leaf Spot': 'トマト セプトリア葉斑病',
+  'Tomato with Spider Mites or Two-spotted Spider Mite': 'トマト ハダニ被害',
+  'Tomato with Target Spot': 'トマト ターゲットスポット病',
+  'Tomato Yellow Leaf Curl Virus': 'トマト 黄化葉巻病',
+  'Tomato Mosaic Virus': 'トマト モザイク病',
+  'Healthy Tomato Plant': '健全なトマト',
 };
